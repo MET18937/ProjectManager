@@ -26,12 +26,17 @@ namespace MvcProject.WebApplication.Controllers
         //    return View(await mvcProjectWebApplicationContext.ToListAsync());
         //}
 
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
             ViewData["StudentParm"] = String.IsNullOrEmpty(sortOrder) ? "student_desc" : "";
             ViewData["ProjectParm"] = sortOrder == "project" ? "project_desc" : "project";
+            ViewData["CurrentFilter"] = searchString;
             var studentHasProjects = from s in _context.StudentHasProject
                                      select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                studentHasProjects = studentHasProjects.Where(s => s.StudentId == int.Parse(searchString));
+            }
             switch (sortOrder)
             {
                 case "student_desc":

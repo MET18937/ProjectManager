@@ -26,11 +26,16 @@ namespace MvcProject.WebApplication.Controllers
         //    return View(await mvcProjectWebApplicationContext.ToListAsync());
         //}
 
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
             ViewData["TeacherSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["CurrentFilter"] = searchString;
             var supervisor = from s in _context.Supervisor
                              select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                supervisor = supervisor.Where(s => s.TeacherId == int.Parse(searchString));
+            }
             switch (sortOrder)
             {
                 case "name_desc":
