@@ -2,7 +2,7 @@ using System.Collections;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Spg.ProjectManager.Application.Models
+namespace MvcProject.WebApplication.Models
 {
     public class Company : EntityBase
     {

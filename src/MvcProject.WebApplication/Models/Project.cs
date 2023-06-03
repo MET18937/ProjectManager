@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Spg.ProjectManager.Application.Models
+namespace MvcProject.WebApplication.Models
 {
 	public class Project : EntityBase
 	{
@@ -9,9 +9,12 @@ namespace Spg.ProjectManager.Application.Models
 		public DateTime SubmitDate { get; set; }
         [ForeignKey("Supervisor")]
         public int? SupervisorId { get; set; }
+        public Supervisor? Supervisor { get; set; }
         [ForeignKey("Company")]
 		public int? CompanyId { get; set; }
+        public Company? Company { get; set; }
         [ForeignKey("Teacher")]
         public int? TeacherId { get; set; }
+        public Teacher? Teacher { get; set; }
     }
 }

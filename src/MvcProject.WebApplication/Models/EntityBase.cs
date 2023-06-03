@@ -1,4 +1,5 @@
-﻿namespace Spg.ProjectManager.Application.Models
+namespace MvcProject.WebApplication.Models
+
 {
     public class EntityBase
     {
