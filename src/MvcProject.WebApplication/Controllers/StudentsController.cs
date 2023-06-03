@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,12 +20,40 @@ namespace MvcProject.WebApplication.Controllers
         }
 
         // GET: Students
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index()
+        //{
+        //    return _context.Student != null ?
+        //                View(await _context.Student.ToListAsync()) :
+        //                Problem("Entity set 'MvcProjectWebApplicationContext.Student'  is null.");
+        //}
+
+        public async Task<IActionResult> Index(string sortOrder)
         {
-              return _context.Student != null ? 
-                          View(await _context.Student.ToListAsync()) :
-                          Problem("Entity set 'MvcProjectWebApplicationContext.Student'  is null.");
+            ViewData["LastnameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "lastname_desc" : "";
+            ViewData["FirstnameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "firstname_desc" : "firstname";
+            var students = from s in _context.Student
+                           select s;
+            switch (sortOrder)
+            {
+                case "lastname_desc":
+                    students = students.OrderByDescending(s => s.Lastname);
+                    break;
+                case "firstname":
+                    students = students.OrderBy(s => s.Firstname);
+                    break;
+                case "firstname_desc":
+                    students = students.OrderByDescending(s => s.Firstname);
+                    break;
+                default:
+                    students = students.OrderBy(s => s.Lastname);
+                    break;
+            }
+            return View(await students.AsNoTracking().ToListAsync());
         }
+
+
+
+
 
         // GET: Students/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -150,14 +178,14 @@ namespace MvcProject.WebApplication.Controllers
             {
                 _context.Student.Remove(student);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool StudentExists(int id)
         {
-          return (_context.Student?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Student?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
