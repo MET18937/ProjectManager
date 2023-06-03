@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,12 +20,39 @@ namespace MvcProject.WebApplication.Controllers
         }
 
         // GET: Teachers
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index()
+        //{
+        //      return _context.Teacher != null ? 
+        //                  View(await _context.Teacher.ToListAsync()) :
+        //                  Problem("Entity set 'MvcProjectWebApplicationContext.Teacher'  is null.");
+        //}
+
+        public async Task<IActionResult> Index(string sortOrder)
         {
-              return _context.Teacher != null ? 
-                          View(await _context.Teacher.ToListAsync()) :
-                          Problem("Entity set 'MvcProjectWebApplicationContext.Teacher'  is null.");
+            ViewData["LastnameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "lastname_desc" : "";
+            ViewData["FirstnameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "firstname_desc" : "firstname";
+            var teachers = from s in _context.Teacher
+                           select s;
+            switch (sortOrder)
+            {
+                case "lastname_desc":
+                    teachers = teachers.OrderByDescending(s => s.Lastname);
+                    break;
+                case "firstname":
+                    teachers = teachers.OrderBy(s => s.Firstname);
+                    break;
+                case "firstname_desc":
+                    teachers = teachers.OrderByDescending(s => s.Firstname);
+                    break;
+                default:
+                    teachers = teachers.OrderBy(s => s.Lastname);
+                    break;
+            }
+            return View(await teachers.AsNoTracking().ToListAsync());
         }
+
+
+
 
         // GET: Teachers/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -150,14 +177,14 @@ namespace MvcProject.WebApplication.Controllers
             {
                 _context.Teacher.Remove(teacher);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool TeacherExists(int id)
         {
-          return (_context.Teacher?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Teacher?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
