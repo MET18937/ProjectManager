@@ -18,3 +18,12 @@ Hauptziel ist es, den Schülern mehr Anerkennung zu verschaffen, damit ihre Absc
 
 
 ![DBModell](./DBModell.png)
+
+### Migration
+Im Nuget Manager Console folgende Befehle ausführen:
+```
+Add-Migration InitialCreate
+Update-Database
+```
+
+
