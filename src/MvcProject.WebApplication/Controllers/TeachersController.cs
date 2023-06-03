@@ -27,12 +27,18 @@ namespace MvcProject.WebApplication.Controllers
         //                  Problem("Entity set 'MvcProjectWebApplicationContext.Teacher'  is null.");
         //}
 
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
             ViewData["LastnameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "lastname_desc" : "";
             ViewData["FirstnameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "firstname_desc" : "firstname";
+            ViewData["CurrentFilter"] = searchString;
             var teachers = from s in _context.Teacher
                            select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                teachers = teachers.Where(s => s.Lastname.Contains(searchString)
+                                                                      || s.Firstname.Contains(searchString));
+            }
             switch (sortOrder)
             {
                 case "lastname_desc":
