@@ -2,13 +2,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Spg.ProjectManager.Application.Models
 {
-    public class StudentHasProject
+    public class StudentHasProject : EntityBase
     {
-        [ForeignKey("StudentId")]
-        public Student? StudentId { get; set; }
+        [ForeignKey("Student")]
+        public int? StudentId { get; set; }
 
-        [ForeignKey("ProjectId")]
-        public Project? ProjectId { get; set; }
+        [ForeignKey("Project")]
+        public int? ProjectId { get; set; }
 
     }
 }
