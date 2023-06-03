@@ -27,12 +27,18 @@ namespace MvcProject.WebApplication.Controllers
         //    return View(await mvcProjectWebApplicationContext.ToListAsync());
         //}
 
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
             ViewData["TitleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
             ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["CurrentFilter"] = searchString;
             var projects = from p in _context.Project
                            select p;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                projects = projects.Where(p => p.Title.Contains(searchString));
+            }
+
             switch (sortOrder)
             {
                 case "title_desc":
