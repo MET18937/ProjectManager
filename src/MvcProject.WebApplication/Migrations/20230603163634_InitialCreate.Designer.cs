@@ -12,7 +12,7 @@ using MvcProject.WebApplication.Data;
 namespace MvcProject.WebApplication.Migrations
 {
     [DbContext(typeof(MvcProjectWebApplicationContext))]
-    [Migration("20230603153638_InitialCreate")]
+    [Migration("20230603163634_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace MvcProject.WebApplication.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Spg.ProjectManager.Application.Models.Company", b =>
+            modelBuilder.Entity("MvcProject.WebApplication.Models.Company", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -59,7 +59,7 @@ namespace MvcProject.WebApplication.Migrations
                     b.ToTable("Company");
                 });
 
-            modelBuilder.Entity("Spg.ProjectManager.Application.Models.Project", b =>
+            modelBuilder.Entity("MvcProject.WebApplication.Models.Project", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -87,10 +87,16 @@ namespace MvcProject.WebApplication.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("SupervisorId");
+
+                    b.HasIndex("TeacherId");
+
                     b.ToTable("Project");
                 });
 
-            modelBuilder.Entity("Spg.ProjectManager.Application.Models.Student", b =>
+            modelBuilder.Entity("MvcProject.WebApplication.Models.Student", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -112,7 +118,7 @@ namespace MvcProject.WebApplication.Migrations
                     b.ToTable("Student");
                 });
 
-            modelBuilder.Entity("Spg.ProjectManager.Application.Models.StudentHasProject", b =>
+            modelBuilder.Entity("MvcProject.WebApplication.Models.StudentHasProject", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -128,10 +134,14 @@ namespace MvcProject.WebApplication.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ProjectId");
+
+                    b.HasIndex("StudentId");
+
                     b.ToTable("StudentHasProject");
                 });
 
-            modelBuilder.Entity("Spg.ProjectManager.Application.Models.Supervisor", b =>
+            modelBuilder.Entity("MvcProject.WebApplication.Models.Supervisor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -147,10 +157,12 @@ namespace MvcProject.WebApplication.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("TeacherId");
+
                     b.ToTable("Supervisor");
                 });
 
-            modelBuilder.Entity("Spg.ProjectManager.Application.Models.Teacher", b =>
+            modelBuilder.Entity("MvcProject.WebApplication.Models.Teacher", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -170,6 +182,51 @@ namespace MvcProject.WebApplication.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Teacher");
+                });
+
+            modelBuilder.Entity("MvcProject.WebApplication.Models.Project", b =>
+                {
+                    b.HasOne("MvcProject.WebApplication.Models.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId");
+
+                    b.HasOne("MvcProject.WebApplication.Models.Supervisor", "Supervisor")
+                        .WithMany()
+                        .HasForeignKey("SupervisorId");
+
+                    b.HasOne("MvcProject.WebApplication.Models.Teacher", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId");
+
+                    b.Navigation("Company");
+
+                    b.Navigation("Supervisor");
+
+                    b.Navigation("Teacher");
+                });
+
+            modelBuilder.Entity("MvcProject.WebApplication.Models.StudentHasProject", b =>
+                {
+                    b.HasOne("MvcProject.WebApplication.Models.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId");
+
+                    b.HasOne("MvcProject.WebApplication.Models.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId");
+
+                    b.Navigation("Project");
+
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("MvcProject.WebApplication.Models.Supervisor", b =>
+                {
+                    b.HasOne("MvcProject.WebApplication.Models.Teacher", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId");
+
+                    b.Navigation("Teacher");
                 });
 #pragma warning restore 612, 618
         }
