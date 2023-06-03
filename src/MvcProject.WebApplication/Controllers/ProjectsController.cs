@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MvcProject.WebApplication.Data;
-using Spg.ProjectManager.Application.Models;
+using MvcProject.WebApplication.Models;
 
 namespace MvcProject.WebApplication.Controllers
 {
@@ -22,9 +22,8 @@ namespace MvcProject.WebApplication.Controllers
         // GET: Projects
         public async Task<IActionResult> Index()
         {
-              return _context.Project != null ? 
-                          View(await _context.Project.ToListAsync()) :
-                          Problem("Entity set 'MvcProjectWebApplicationContext.Project'  is null.");
+            var mvcProjectWebApplicationContext = _context.Project.Include(p => p.Company).Include(p => p.Supervisor).Include(p => p.Teacher);
+            return View(await mvcProjectWebApplicationContext.ToListAsync());
         }
 
         // GET: Projects/Details/5
@@ -36,6 +35,9 @@ namespace MvcProject.WebApplication.Controllers
             }
 
             var project = await _context.Project
+                .Include(p => p.Company)
+                .Include(p => p.Supervisor)
+                .Include(p => p.Teacher)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (project == null)
             {
@@ -48,6 +50,9 @@ namespace MvcProject.WebApplication.Controllers
         // GET: Projects/Create
         public IActionResult Create()
         {
+            ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "Id");
+            ViewData["SupervisorId"] = new SelectList(_context.Supervisor, "Id", "Id");
+            ViewData["TeacherId"] = new SelectList(_context.Teacher, "Id", "Id");
             return View();
         }
 
@@ -64,6 +69,9 @@ namespace MvcProject.WebApplication.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "Id", project.CompanyId);
+            ViewData["SupervisorId"] = new SelectList(_context.Supervisor, "Id", "Id", project.SupervisorId);
+            ViewData["TeacherId"] = new SelectList(_context.Teacher, "Id", "Id", project.TeacherId);
             return View(project);
         }
 
@@ -80,6 +88,9 @@ namespace MvcProject.WebApplication.Controllers
             {
                 return NotFound();
             }
+            ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "Id", project.CompanyId);
+            ViewData["SupervisorId"] = new SelectList(_context.Supervisor, "Id", "Id", project.SupervisorId);
+            ViewData["TeacherId"] = new SelectList(_context.Teacher, "Id", "Id", project.TeacherId);
             return View(project);
         }
 
@@ -115,6 +126,9 @@ namespace MvcProject.WebApplication.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CompanyId"] = new SelectList(_context.Company, "Id", "Id", project.CompanyId);
+            ViewData["SupervisorId"] = new SelectList(_context.Supervisor, "Id", "Id", project.SupervisorId);
+            ViewData["TeacherId"] = new SelectList(_context.Teacher, "Id", "Id", project.TeacherId);
             return View(project);
         }
 
@@ -127,6 +141,9 @@ namespace MvcProject.WebApplication.Controllers
             }
 
             var project = await _context.Project
+                .Include(p => p.Company)
+                .Include(p => p.Supervisor)
+                .Include(p => p.Teacher)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (project == null)
             {

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Spg.ProjectManager.Application.Models.Project>
+﻿@model IEnumerable<MvcProject.WebApplication.Models.Project>
 
 @{
     ViewData["Title"] = "Index";
@@ -22,13 +22,13 @@
                 @Html.DisplayNameFor(model => model.SubmitDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SupervisorId)
+                @Html.DisplayNameFor(model => model.Supervisor)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CompanyId)
+                @Html.DisplayNameFor(model => model.Company)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TeacherId)
+                @Html.DisplayNameFor(model => model.Teacher)
             </th>
             <th></th>
         </tr>
@@ -46,13 +46,13 @@
                 @Html.DisplayFor(modelItem => item.SubmitDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SupervisorId)
+                @Html.DisplayFor(modelItem => item.Supervisor.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CompanyId)
+                @Html.DisplayFor(modelItem => item.Company.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TeacherId)
+                @Html.DisplayFor(modelItem => item.Teacher.Id)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

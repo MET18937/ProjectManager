@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MvcProject.WebApplication.Data;
-using Spg.ProjectManager.Application.Models;
+using MvcProject.WebApplication.Models;
 
 namespace MvcProject.WebApplication.Controllers
 {
@@ -22,9 +22,8 @@ namespace MvcProject.WebApplication.Controllers
         // GET: StudentHasProjects
         public async Task<IActionResult> Index()
         {
-              return _context.StudentHasProject != null ? 
-                          View(await _context.StudentHasProject.ToListAsync()) :
-                          Problem("Entity set 'MvcProjectWebApplicationContext.StudentHasProject'  is null.");
+            var mvcProjectWebApplicationContext = _context.StudentHasProject.Include(s => s.Project).Include(s => s.Student);
+            return View(await mvcProjectWebApplicationContext.ToListAsync());
         }
 
         // GET: StudentHasProjects/Details/5
@@ -36,6 +35,8 @@ namespace MvcProject.WebApplication.Controllers
             }
 
             var studentHasProject = await _context.StudentHasProject
+                .Include(s => s.Project)
+                .Include(s => s.Student)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (studentHasProject == null)
             {
@@ -48,6 +49,8 @@ namespace MvcProject.WebApplication.Controllers
         // GET: StudentHasProjects/Create
         public IActionResult Create()
         {
+            ViewData["ProjectId"] = new SelectList(_context.Project, "Id", "Id");
+            ViewData["StudentId"] = new SelectList(_context.Student, "Id", "Id");
             return View();
         }
 
@@ -64,6 +67,8 @@ namespace MvcProject.WebApplication.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ProjectId"] = new SelectList(_context.Project, "Id", "Id", studentHasProject.ProjectId);
+            ViewData["StudentId"] = new SelectList(_context.Student, "Id", "Id", studentHasProject.StudentId);
             return View(studentHasProject);
         }
 
@@ -80,6 +85,8 @@ namespace MvcProject.WebApplication.Controllers
             {
                 return NotFound();
             }
+            ViewData["ProjectId"] = new SelectList(_context.Project, "Id", "Id", studentHasProject.ProjectId);
+            ViewData["StudentId"] = new SelectList(_context.Student, "Id", "Id", studentHasProject.StudentId);
             return View(studentHasProject);
         }
 
@@ -115,6 +122,8 @@ namespace MvcProject.WebApplication.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ProjectId"] = new SelectList(_context.Project, "Id", "Id", studentHasProject.ProjectId);
+            ViewData["StudentId"] = new SelectList(_context.Student, "Id", "Id", studentHasProject.StudentId);
             return View(studentHasProject);
         }
 
@@ -127,6 +136,8 @@ namespace MvcProject.WebApplication.Controllers
             }
 
             var studentHasProject = await _context.StudentHasProject
+                .Include(s => s.Project)
+                .Include(s => s.Student)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (studentHasProject == null)
             {

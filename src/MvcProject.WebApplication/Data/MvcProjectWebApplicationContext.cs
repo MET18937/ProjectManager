@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Spg.ProjectManager.Application.Models;
+using MvcProject.WebApplication.Models;
 
 namespace MvcProject.WebApplication.Data
 {
@@ -14,16 +14,16 @@ namespace MvcProject.WebApplication.Data
         {
         }
 
-        public DbSet<Spg.ProjectManager.Application.Models.Company> Company { get; set; } = default!;
+        public DbSet<MvcProject.WebApplication.Models.Teacher> Teacher { get; set; } = default!;
 
-        public DbSet<Spg.ProjectManager.Application.Models.Teacher> Teacher { get; set; } = default!;
+        public DbSet<MvcProject.WebApplication.Models.Company> Company { get; set; } = default!;
 
-        public DbSet<Spg.ProjectManager.Application.Models.Student> Student { get; set; } = default!;
+        public DbSet<MvcProject.WebApplication.Models.Student> Student { get; set; } = default!;
 
-        public DbSet<Spg.ProjectManager.Application.Models.Supervisor> Supervisor { get; set; } = default!;
+        public DbSet<MvcProject.WebApplication.Models.Supervisor> Supervisor { get; set; } = default!;
 
-        public DbSet<Spg.ProjectManager.Application.Models.Project> Project { get; set; } = default!;
+        public DbSet<MvcProject.WebApplication.Models.Project> Project { get; set; } = default!;
 
-        public DbSet<Spg.ProjectManager.Application.Models.StudentHasProject> StudentHasProject { get; set; } = default!;
+        public DbSet<MvcProject.WebApplication.Models.StudentHasProject> StudentHasProject { get; set; } = default!;
     }
 }

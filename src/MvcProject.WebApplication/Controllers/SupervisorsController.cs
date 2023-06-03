@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MvcProject.WebApplication.Data;
-using Spg.ProjectManager.Application.Models;
+using MvcProject.WebApplication.Models;
 
 namespace MvcProject.WebApplication.Controllers
 {
@@ -22,9 +22,8 @@ namespace MvcProject.WebApplication.Controllers
         // GET: Supervisors
         public async Task<IActionResult> Index()
         {
-              return _context.Supervisor != null ? 
-                          View(await _context.Supervisor.ToListAsync()) :
-                          Problem("Entity set 'MvcProjectWebApplicationContext.Supervisor'  is null.");
+            var mvcProjectWebApplicationContext = _context.Supervisor.Include(s => s.Teacher);
+            return View(await mvcProjectWebApplicationContext.ToListAsync());
         }
 
         // GET: Supervisors/Details/5
@@ -36,6 +35,7 @@ namespace MvcProject.WebApplication.Controllers
             }
 
             var supervisor = await _context.Supervisor
+                .Include(s => s.Teacher)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (supervisor == null)
             {
@@ -48,6 +48,7 @@ namespace MvcProject.WebApplication.Controllers
         // GET: Supervisors/Create
         public IActionResult Create()
         {
+            ViewData["TeacherId"] = new SelectList(_context.Teacher, "Id", "Id");
             return View();
         }
 
@@ -56,7 +57,7 @@ namespace MvcProject.WebApplication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TeacherId,Description,Id")] Supervisor supervisor)
+        public async Task<IActionResult> Create([Bind("Description,TeacherId,Id")] Supervisor supervisor)
         {
             if (ModelState.IsValid)
             {
@@ -64,6 +65,7 @@ namespace MvcProject.WebApplication.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["TeacherId"] = new SelectList(_context.Teacher, "Id", "Id", supervisor.TeacherId);
             return View(supervisor);
         }
 
@@ -80,6 +82,7 @@ namespace MvcProject.WebApplication.Controllers
             {
                 return NotFound();
             }
+            ViewData["TeacherId"] = new SelectList(_context.Teacher, "Id", "Id", supervisor.TeacherId);
             return View(supervisor);
         }
 
@@ -88,7 +91,7 @@ namespace MvcProject.WebApplication.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TeacherId,Description,Id")] Supervisor supervisor)
+        public async Task<IActionResult> Edit(int id, [Bind("Description,TeacherId,Id")] Supervisor supervisor)
         {
             if (id != supervisor.Id)
             {
@@ -115,6 +118,7 @@ namespace MvcProject.WebApplication.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["TeacherId"] = new SelectList(_context.Teacher, "Id", "Id", supervisor.TeacherId);
             return View(supervisor);
         }
 
@@ -127,6 +131,7 @@ namespace MvcProject.WebApplication.Controllers
             }
 
             var supervisor = await _context.Supervisor
+                .Include(s => s.Teacher)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (supervisor == null)
             {
