@@ -19,5 +19,7 @@ namespace MvcProject.WebApplication.Data
         public DbSet<Spg.ProjectManager.Application.Models.Teacher> Teacher { get; set; } = default!;
 
         public DbSet<Spg.ProjectManager.Application.Models.Student> Student { get; set; } = default!;
+
+        public DbSet<Spg.ProjectManager.Application.Models.Supervisor> Supervisor { get; set; } = default!;
     }
 }
