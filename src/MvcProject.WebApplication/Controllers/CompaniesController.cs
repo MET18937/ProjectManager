@@ -27,10 +27,19 @@ namespace MvcProject.WebApplication.Controllers
         //                  Problem("Entity set 'MvcProjectWebApplicationContext.Company'  is null.");
         //}
 
-        public async Task<IActionResult> Index(string sortOrder, string searchString)
+        public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
+            ViewData["CurrentSort"] = sortOrder;
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewData["CurrentFilter"] = searchString;
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
             var company = from c in _context.Company
                           select c;
             if (!String.IsNullOrEmpty(searchString))
@@ -46,7 +55,8 @@ namespace MvcProject.WebApplication.Controllers
                     company = company.OrderBy(s => s.Name);
                     break;
             }
-            return View(await company.AsNoTracking().ToListAsync());
+            int pageSize = 10;
+            return View(await PaginatedList<Company>.CreateAsync(company.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
 

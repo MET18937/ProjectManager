@@ -27,10 +27,20 @@ namespace MvcProject.WebApplication.Controllers
         //                Problem("Entity set 'MvcProjectWebApplicationContext.Student'  is null.");
         //}
 
-        public async Task<IActionResult> Index(string sortOrder, string searchString)
+        public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
+            ViewData["CurrentSort"] = sortOrder;
             ViewData["LastnameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "lastname_desc" : "";
             ViewData["FirstnameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "firstname_desc" : "firstname";
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
             ViewData["CurrentFilter"] = searchString;
             var students = from s in _context.Student
                            select s;
@@ -54,7 +64,8 @@ namespace MvcProject.WebApplication.Controllers
                     students = students.OrderBy(s => s.Lastname);
                     break;
             }
-            return View(await students.AsNoTracking().ToListAsync());
+            int pageSize = 10;
+            return View(await PaginatedList<Student>.CreateAsync(students.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
 

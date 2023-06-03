@@ -26,10 +26,13 @@ namespace MvcProject.WebApplication.Controllers
         //    return View(await mvcProjectWebApplicationContext.ToListAsync());
         //}
 
-        public async Task<IActionResult> Index(string sortOrder, string searchString)
+        public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
+            ViewData["CurrentSort"] = sortOrder;
             ViewData["StudentParm"] = String.IsNullOrEmpty(sortOrder) ? "student_desc" : "";
             ViewData["ProjectParm"] = sortOrder == "project" ? "project_desc" : "project";
+            if (searchString != null) pageNumber = 1;
+            else searchString = currentFilter;
             ViewData["CurrentFilter"] = searchString;
             var studentHasProjects = from s in _context.StudentHasProject
                                      select s;
@@ -52,7 +55,8 @@ namespace MvcProject.WebApplication.Controllers
                     studentHasProjects = studentHasProjects.OrderBy(s => s.StudentId);
                     break;
             }
-            return View(await studentHasProjects.AsNoTracking().ToListAsync());
+            int pageSize = 10;
+            return View(await PaginatedList<StudentHasProject>.CreateAsync(studentHasProjects.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
 

@@ -26,10 +26,19 @@ namespace MvcProject.WebApplication.Controllers
         //    return View(await mvcProjectWebApplicationContext.ToListAsync());
         //}
 
-        public async Task<IActionResult> Index(string sortOrder, string searchString)
+        public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
+            ViewData["CurrentSort"] = sortOrder;
             ViewData["TeacherSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewData["CurrentFilter"] = searchString;
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
             var supervisor = from s in _context.Supervisor
                              select s;
             if (!String.IsNullOrEmpty(searchString))
@@ -46,7 +55,10 @@ namespace MvcProject.WebApplication.Controllers
                     supervisor = supervisor.OrderBy(s => s.TeacherId);
                     break;
             }
-            return View(await supervisor.AsNoTracking().ToListAsync());
+
+
+            int pageSize = 10;
+            return View(await PaginatedList<Supervisor>.CreateAsync(supervisor.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
 
