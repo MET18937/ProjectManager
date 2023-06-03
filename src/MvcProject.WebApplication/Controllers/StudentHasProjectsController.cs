@@ -35,7 +35,7 @@ namespace MvcProject.WebApplication.Controllers
                                      select s;
             if (!String.IsNullOrEmpty(searchString))
             {
-                studentHasProjects = studentHasProjects.Where(s => s.StudentId.ToString().Contains(searchString));
+                studentHasProjects = studentHasProjects.Where(s => s.StudentId == int.Parse(searchString));
             }
             switch (sortOrder)
             {
