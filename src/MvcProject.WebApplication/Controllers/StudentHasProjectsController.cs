@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,11 +20,37 @@ namespace MvcProject.WebApplication.Controllers
         }
 
         // GET: StudentHasProjects
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index()
+        //{
+        //    var mvcProjectWebApplicationContext = _context.StudentHasProject.Include(s => s.Project).Include(s => s.Student);
+        //    return View(await mvcProjectWebApplicationContext.ToListAsync());
+        //}
+
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var mvcProjectWebApplicationContext = _context.StudentHasProject.Include(s => s.Project).Include(s => s.Student);
-            return View(await mvcProjectWebApplicationContext.ToListAsync());
+            ViewData["StudentParm"] = String.IsNullOrEmpty(sortOrder) ? "student_desc" : "";
+            ViewData["ProjectParm"] = sortOrder == "project" ? "project_desc" : "project";
+            var studentHasProjects = from s in _context.StudentHasProject
+                                     select s;
+            switch (sortOrder)
+            {
+                case "student_desc":
+                    studentHasProjects = studentHasProjects.OrderByDescending(s => s.StudentId);
+                    break;
+                case "project":
+                    studentHasProjects = studentHasProjects.OrderBy(s => s.ProjectId);
+                    break;
+                case "project_desc":
+                    studentHasProjects = studentHasProjects.OrderByDescending(s => s.ProjectId);
+                    break;
+                default:
+                    studentHasProjects = studentHasProjects.OrderBy(s => s.StudentId);
+                    break;
+            }
+            return View(await studentHasProjects.AsNoTracking().ToListAsync());
         }
+
+
 
         // GET: StudentHasProjects/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -161,14 +187,14 @@ namespace MvcProject.WebApplication.Controllers
             {
                 _context.StudentHasProject.Remove(studentHasProject);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool StudentHasProjectExists(int id)
         {
-          return (_context.StudentHasProject?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.StudentHasProject?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
