@@ -27,11 +27,16 @@ namespace MvcProject.WebApplication.Controllers
         //                  Problem("Entity set 'MvcProjectWebApplicationContext.Company'  is null.");
         //}
 
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
         {
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["CurrentFilter"] = searchString;
             var company = from c in _context.Company
                           select c;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                company = company.Where(s => s.Name.Contains(searchString));
+            }
             switch (sortOrder)
             {
                 case "name_desc":
