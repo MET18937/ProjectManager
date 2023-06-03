@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,11 +20,31 @@ namespace MvcProject.WebApplication.Controllers
         }
 
         // GET: Supervisors
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index()
+        //{
+        //    var mvcProjectWebApplicationContext = _context.Supervisor.Include(s => s.Teacher);
+        //    return View(await mvcProjectWebApplicationContext.ToListAsync());
+        //}
+
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var mvcProjectWebApplicationContext = _context.Supervisor.Include(s => s.Teacher);
-            return View(await mvcProjectWebApplicationContext.ToListAsync());
+            ViewData["TeacherSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            var supervisor = from s in _context.Supervisor
+                             select s;
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    supervisor = supervisor.OrderByDescending(s => s.TeacherId);
+                    break;
+
+                default:
+                    supervisor = supervisor.OrderBy(s => s.TeacherId);
+                    break;
+            }
+            return View(await supervisor.AsNoTracking().ToListAsync());
         }
+
+
 
         // GET: Supervisors/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -155,14 +175,14 @@ namespace MvcProject.WebApplication.Controllers
             {
                 _context.Supervisor.Remove(supervisor);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool SupervisorExists(int id)
         {
-          return (_context.Supervisor?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Supervisor?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
