@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,12 +20,31 @@ namespace MvcProject.WebApplication.Controllers
         }
 
         // GET: Companies
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index()
+        //{
+        //      return _context.Company != null ? 
+        //                  View(await _context.Company.ToListAsync()) :
+        //                  Problem("Entity set 'MvcProjectWebApplicationContext.Company'  is null.");
+        //}
+
+        public async Task<IActionResult> Index(string sortOrder)
         {
-              return _context.Company != null ? 
-                          View(await _context.Company.ToListAsync()) :
-                          Problem("Entity set 'MvcProjectWebApplicationContext.Company'  is null.");
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            var company = from c in _context.Company
+                          select c;
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    company = company.OrderByDescending(s => s.Name);
+                    break;
+                default:
+                    company = company.OrderBy(s => s.Name);
+                    break;
+            }
+            return View(await company.AsNoTracking().ToListAsync());
         }
+
+
 
         // GET: Companies/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -150,14 +169,14 @@ namespace MvcProject.WebApplication.Controllers
             {
                 _context.Company.Remove(company);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CompanyExists(int id)
         {
-          return (_context.Company?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Company?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
