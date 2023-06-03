@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Bogus;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -19,12 +20,38 @@ namespace MvcProject.WebApplication.Controllers
             _context = context;
         }
 
-        // GET: Projects
-        public async Task<IActionResult> Index()
+        //// GET: Projects
+        //public async Task<IActionResult> Index()
+        //{
+        //    var mvcProjectWebApplicationContext = _context.Project.Include(p => p.Company).Include(p => p.Supervisor).Include(p => p.Teacher);
+        //    return View(await mvcProjectWebApplicationContext.ToListAsync());
+        //}
+
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var mvcProjectWebApplicationContext = _context.Project.Include(p => p.Company).Include(p => p.Supervisor).Include(p => p.Teacher);
-            return View(await mvcProjectWebApplicationContext.ToListAsync());
+            ViewData["TitleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            var projects = from p in _context.Project
+                           select p;
+            switch (sortOrder)
+            {
+                case "title_desc":
+                    projects = projects.OrderByDescending(p => p.Title);
+                    break;
+                case "Date":
+                    projects = projects.OrderBy(p => p.SubmitDate);
+                    break;
+                case "date_desc":
+                    projects = projects.OrderByDescending(p => p.SubmitDate);
+                    break;
+                default:
+                    projects = projects.OrderBy(p => p.Title);
+                    break;
+            }
+            return View(await projects.AsNoTracking().ToListAsync());
         }
+
+
 
         // GET: Projects/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -167,14 +194,14 @@ namespace MvcProject.WebApplication.Controllers
             {
                 _context.Project.Remove(project);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ProjectExists(int id)
         {
-          return (_context.Project?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Project?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
