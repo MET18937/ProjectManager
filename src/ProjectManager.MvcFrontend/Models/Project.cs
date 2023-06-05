@@ -13,6 +13,8 @@ namespace MvcProject.WebApplication.Models
         [ForeignKey("Company")]
 		public int? CompanyId { get; set; }
         public Company? Company { get; set; }
+
+        // fluent api verwenden
         [ForeignKey("Teacher")]
         public int? TeacherId { get; set; }
         public Teacher? Teacher { get; set; }
