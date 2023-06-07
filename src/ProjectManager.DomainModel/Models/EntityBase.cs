@@ -1,5 +1,4 @@
-namespace MvcProject.WebApplication.Models
-
+namespace ProjectManager.DomainModel.Models
 {
     public class EntityBase
     {

@@ -1,14 +1,25 @@
+using ProjectManager.DomainModel.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MvcProject.WebApplication.Models
+
+namespace ProjectManager.ComainModel.Models
 {
     public class Supervisor : EntityBase
     {
         public string? Description { get; set; }
-
-        [ForeignKey("Teacher")]
         public int? TeacherId { get; set; }
-        public Teacher? Teacher { get; set; }
+
+        //teacher navigation reference
+        public int? TeacherNavigationId { get; set; }
+        public virtual Teacher TeacherNavigation { get; set; } = default!;
+
+        // TDD logic
+        public bool IsAssignedToTeacher()
+        {
+            return TeacherNavigationId != null;
+        }
+
+
 
     }
 }
