@@ -7,16 +7,16 @@
 
 ### Entities:
 * Entities
-  * sichere Listen
-  * Konstruktoren
-  * Relations / Navigations
-  * Teileweise Logik (TDD) (Produkt in den Warenkorb legen, prüft: Produkt-Stückzahl, ob Produkt schon im Warenkorb ist , dekrementiert Produkt-Stückzahl, ...)
-  * Unite Tests (TDD)
-    * Create_Success_Test (Eine Entity adden)
-    * Relations / Navigations
-* Enums
-* Lookup-Tables
-* Value Objects
+  - [x] sichere Listen
+  - [ ] Konstruktoren
+  - [x] Relations / Navigations
+  - [x] Teileweise Logik (TDD) (Produkt in den Warenkorb legen, prüft: Produkt-Stückzahl, ob Produkt schon im Warenkorb ist , dekrementiert Produkt-Stückzahl, ...)
+  - [ ] Unite Tests (TDD)
+    - [ ] Create_Success_Test (Eine Entity adden)
+    - [ ] Relations / Navigations
+- [ ] Enums
+- [ ] Lookup-Tables
+- [ ] Value Objects
 
 ### Service:
 * mind. 2 Services
