@@ -4,9 +4,6 @@ namespace ProjectManager.DomainModel.Models
 {
     public class StudentHasProject : EntityBase
     {
-        public int? StudentId { get; set; }
-        public int? ProjectId { get; set; }
-
         // student navigation reference
         public int? StudentNavigationId { get; set; }
         public virtual Student StudentNavigation { get; set; } = default!;
@@ -33,14 +30,19 @@ namespace ProjectManager.DomainModel.Models
         {
         }
 
-        public StudentHasProject(int? studentId, int? projectId, int? studentNavigationId, Student studentNavigation, int? projectNavigationId, Project projectNavigation)
+        public StudentHasProject(Student studentNavigation, Project projectNavigation)
         {
-            StudentId = studentId;
-            ProjectId = projectId;
-            StudentNavigationId = studentNavigationId;
             StudentNavigation = studentNavigation;
-            ProjectNavigationId = projectNavigationId;
             ProjectNavigation = projectNavigation;
         }
+
+        public StudentHasProject(int id, Student studentNavigation, Project projectNavigation)
+        {
+            Id = id;
+            StudentNavigation = studentNavigation;
+            ProjectNavigation = projectNavigation;
+        }
+
+
     }
 }

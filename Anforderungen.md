@@ -1,6 +1,6 @@
 # Anforderungen Projekt POS SS 22/23
 
-## Midenstanforderungen für ein Genügend (4):
+## Midenstanforderungen fÃ¼r ein GenÃ¼gend (4):
 
 ### DB:
 * Simpel, aber mind. 5 Tabellen inkl. Lookup-Tables
@@ -8,13 +8,13 @@
 ### Entities:
 * Entities
   - [x] sichere Listen
-  - [ ] Konstruktoren
+  - [x] Konstruktoren
   - [x] Relations / Navigations
-  - [x] Teileweise Logik (TDD) (Produkt in den Warenkorb legen, prüft: Produkt-Stückzahl, ob Produkt schon im Warenkorb ist , dekrementiert Produkt-Stückzahl, ...)
-  - [ ] Unite Tests (TDD)
-    - [ ] Create_Success_Test (Eine Entity adden)
-    - [ ] Relations / Navigations
-- [ ] Enums
+  - [x] Teileweise Logik (TDD) (Produkt in den Warenkorb legen, prÃ¼ft: Produkt-StÃ¼ckzahl, ob Produkt schon im Warenkorb ist , dekrementiert Produkt-StÃ¼ckzahl, ...)
+  - [x] Unite Tests (TDD)
+    - [x] Create_Success_Test (Eine Entity adden)
+    - [x] Relations / Navigations
+- [x] Enums
 - [ ] Lookup-Tables
 - [ ] Value Objects
 
@@ -22,8 +22,8 @@
 * mind. 2 Services
 * Get-Methode(n) min. eine Methode, zur Auflistung der Daten aus einer Tabelle
 * Create/Update/Delete-Methoden
-  * Create: mind. 5 Bedingungen (LinQ) prüfen (Bedingungen sollen prüfen, ob ein Datensatz angelegt werden darf)
-  * Update: mind. 2 Bedingungen (LinQ) prüfen (Bedingungen sollen prüfen, ob ein Datensatz geändert werden darf)
+  * Create: mind. 5 Bedingungen (LinQ) prÃ¼fen (Bedingungen sollen prÃ¼fen, ob ein Datensatz angelegt werden darf)
+  * Update: mind. 2 Bedingungen (LinQ) prÃ¼fen (Bedingungen sollen prÃ¼fen, ob ein Datensatz geÃ¤ndert werden darf)
 * Filtering / Sorting / Paging implementieren
 * C.R.U.D. + Fluent-API oder Mediator + C.Q.S. oder etwas anderes
 
@@ -42,25 +42,25 @@
 (coming soon)
 
 ### GIT:
-Abgabe auf GIT + Präsentation. Möglichst viele pushes über den Zeitraum verteilt
+Abgabe auf GIT + PrÃ¤sentation. MÃ¶glichst viele pushes Ã¼ber den Zeitraum verteilt
 
 ---
 
-## Implementierungsvorschläge für 3 bis 1:
+## ImplementierungsvorschlÃ¤ge fÃ¼r 3 bis 1:
 
-* Sauberes und durchgängiges Exception Handling
-* Ein simpler, rudimentärer LogIn/LogOut
+* Sauberes und durchgÃ¤ngiges Exception Handling
+* Ein simpler, rudimentÃ¤rer LogIn/LogOut
 * Filterung nach einem Freitextfeld, einem Datumsraum UND einer Drop-Down-Box. Jedes davon optional
 * Volltextsuche mit Fehlerkorrektur in einer Tabelle, z.B. Namen
-* Erhöhung der Anzahl der Prüfungen in den Service-Methoden (Add/Update/Delete)
+* ErhÃ¶hung der Anzahl der PrÃ¼fungen in den Service-Methoden (Add/Update/Delete)
 * DTO Mapping
-* Ein Service benutzt einen anderen Service zur Datenvalidierung (z.B. StockService prüft Lagerbestände)
-* Über die Angabe hinaus, eine weiterer Service mit Add- Update- Delete-Methode
+* Ein Service benutzt einen anderen Service zur Datenvalidierung (z.B. StockService prÃ¼ft LagerbestÃ¤nde)
+* Ãœber die Angabe hinaus, eine weiterer Service mit Add- Update- Delete-Methode
 * Umsetzung mittels C.Q.R.S. und MediatR (C.Q.R.S.- und Mediator-Pattern)
-* Mocking: MoQ wird für TDD verwendet
+* Mocking: MoQ wird fÃ¼r TDD verwendet
 * GIT: Arbeiten mit Feature-Branches, idealerweise 1 Branch pro Feature + Merge auf den Main-Branch
 
-Ein Punktespiegel für ene Note besser als 4, +/- ein Notengrad. Code Quality (Optik und Sauberkeit) spielt ebenfalls eine Rolle, ist aber schwer monetär messbar.
+Ein Punktespiegel fÃ¼r ene Note besser als 4, +/- ein Notengrad. Code Quality (Optik und Sauberkeit) spielt ebenfalls eine Rolle, ist aber schwer monetÃ¤r messbar.
 
 ## Bewertungskriterien:
 
@@ -77,13 +77,13 @@ Ein Punktespiegel für ene Note besser als 4, +/- ein Notengrad. Code Quality (Op
 * Presentation Tests
   * Integration Tests, idealerweise TDD, Codeabdeckung
 * Git-Performance
-  * Häufigkeit und Abstand der einzelnen Pushes
+  * HÃ¤ufigkeit und Abstand der einzelnen Pushes
   * Anzahl der Branches
   * Verwendung von Merge, Rebase, Squash, ...
 * Code Cquality:
   * Keine auskommentierten Codeteile
   * Einhaltung der Coding Conventions
-  * Einrückungen, unnötige Leerzeilen, ...
+  * EinrÃ¼ckungen, unnÃ¶tige Leerzeilen, ...
   * *How smells your code*
 
 

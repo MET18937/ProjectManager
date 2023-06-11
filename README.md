@@ -19,11 +19,4 @@ The main goal is to give students more recognition so that their final projects 
 
 ![DBModell](./DBModell.png)
 
-### Migration
-In the Nuget Manager Console, execute the following commands:
-```
-Add-Migration InitialCreate
-Update-Database
-```
-
 

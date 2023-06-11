@@ -35,12 +35,19 @@ namespace ProjectManager.DomainModel.Models
         {
         }
 
-        public Teacher(string? firstname, string? lastname, string? email, List<Supervisor> supervisors)
+        public Teacher(string? firstname, string? lastname, string? email)
         {
             Firstname = firstname;
             Lastname = lastname;
             Email = email;
-            _supervisors = supervisors;
+        }
+
+        public Teacher(int id, string? firstname, string? lastname, string? email)
+        {
+            Id = id;
+            Firstname = firstname;
+            Lastname = lastname;
+            Email = email;
         }
     }
 }

@@ -1,4 +1,4 @@
-using ProjectManager.DomainModel.Models;
+using ProjectManager.DomainModel.Enumerations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace ProjectManager.DomainModel.Models
 {
@@ -7,6 +7,7 @@ namespace ProjectManager.DomainModel.Models
         public string? Title { get; set; }
         public string? Description { get; set; }
         public DateTime SubmitDate { get; set; }
+        public Projectstates Projectstate { get; set; }
 
         // supervisor navigation reference
         public int? SupervisorNavigationId { get; set; }
@@ -38,18 +39,26 @@ namespace ProjectManager.DomainModel.Models
         {
         }
 
-        public Project(string? title, string? description, DateTime submitDate, int? supervisorNavigationId, Supervisor supervisorNavigation, int? companyNavigationId, Company companyNavigation, int? teacherNavigationId, Teacher teacherNavigation, List<StudentHasProject> studenthasprojects)
+        public Project(string? title, string? description, DateTime submitDate, Projectstates projectstate, Supervisor supervisorNavigation, Company companyNavigation, Teacher teacherNavigation)
         {
             Title = title;
             Description = description;
             SubmitDate = submitDate;
-            SupervisorNavigationId = supervisorNavigationId;
+            Projectstate = projectstate;
             SupervisorNavigation = supervisorNavigation;
-            CompanyNavigationId = companyNavigationId;
             CompanyNavigation = companyNavigation;
-            TeacherNavigationId = teacherNavigationId;
             TeacherNavigation = teacherNavigation;
-            _studenthasprojects = studenthasprojects;
+        }
+        public Project(int id, string? title, string? description, DateTime submitDate, Projectstates projectstate, Supervisor supervisorNavigation, Company companyNavigation, Teacher teacherNavigation)
+        {
+            Id = id;
+            Title = title;
+            Description = description;
+            SubmitDate = submitDate;
+            Projectstate = projectstate;
+            SupervisorNavigation = supervisorNavigation;
+            CompanyNavigation = companyNavigation;
+            TeacherNavigation = teacherNavigation;
         }
     }
 }

@@ -24,11 +24,15 @@ namespace ProjectManager.DomainModel.Models
         {
         }
 
-        public Supervisor(string? description, int? teacherId, int? teacherNavigationId, Teacher teacherNavigation)
+        public Supervisor(string? description, Teacher teacherNavigation)
         {
             Description = description;
-            TeacherId = teacherId;
-            TeacherNavigationId = teacherNavigationId;
+            TeacherNavigation = teacherNavigation;
+        }
+        public Supervisor(int id, string? description, Teacher teacherNavigation)
+        {
+            Id = id;
+            Description = description;
             TeacherNavigation = teacherNavigation;
         }
     }

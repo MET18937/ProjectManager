@@ -30,16 +30,35 @@ namespace ProjectManager.DomainModel.Models
             return false;
         }
 
+        // get all project that are assigned to student
+        public List<Project> GetProjects()
+        {
+            List<Project> projects = new();
+            foreach (var studentHasProject in StudentHasProjects)
+            {
+                projects.Add(studentHasProject.ProjectNavigation);
+            }
+            return projects;
+        }
+
+
         public Student()
         {
         }
 
-        public Student(string? firstname, string? lastname, string? email, List<StudentHasProject> studentHasProjects)
+        public Student(string? firstname, string? lastname, string? email)
         {
             Firstname = firstname;
             Lastname = lastname;
             Email = email;
-            _studentHasProjects = studentHasProjects;
+        }
+
+        public Student(int id, string? firstname, string? lastname, string? email)
+        {
+            Id = id;
+            Firstname = firstname;
+            Lastname = lastname;
+            Email = email;
         }
     }
 }

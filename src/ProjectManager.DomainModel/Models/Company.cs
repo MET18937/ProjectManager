@@ -22,16 +22,15 @@ namespace ProjectManager.DomainModel.Models
 
 
         // TDD logic
-        public bool IsAssignedToProject()
+        public bool IsInAustria()
         {
-            return Projects.Count > 0;
+            return Country == "Österreich";
         }
-
 
         public Company()
         {
         }
-        public Company(string? name, string? address, string? email, string? city, string? region, string? postalCode, string? country, List<Project> projects)
+        public Company(string? name, string? address, string? email, string? city, string? region, string? postalCode, string? country)
         {
             Name = name;
             Address = address;
@@ -40,8 +39,22 @@ namespace ProjectManager.DomainModel.Models
             Region = region;
             PostalCode = postalCode;
             Country = country;
-            _projects = projects;
         }
+
+
+        public Company(int id, string? name, string? address, string? email, string? city, string? region, string? postalCode, string? country)
+        {
+            Id = id;
+            Name = name;
+            Address = address;
+            Email = email;
+            City = city;
+            Region = region;
+            PostalCode = postalCode;
+            Country = country;
+        }
+
+
     }
 
 
