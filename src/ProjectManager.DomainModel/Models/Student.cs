@@ -12,23 +12,6 @@ namespace ProjectManager.DomainModel.Models
         public List<StudentHasProject> _studentHasProjects { get; set; } = new();
         public virtual IReadOnlyList<StudentHasProject> StudentHasProjects => _studentHasProjects;
 
-        // TDD logic
-        public bool IsAssignedToProject()
-        {
-            return StudentHasProjects.Count > 0;
-        }
-
-        public bool IsAssignedToProject(int projectId)
-        {
-            foreach (var studentHasProject in StudentHasProjects)
-            {
-                if (studentHasProject.ProjectId == projectId)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
 
         // get all project that are assigned to student
         public List<Project> GetProjects()

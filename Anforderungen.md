@@ -15,8 +15,8 @@
     - [x] Create_Success_Test (Eine Entity adden)
     - [x] Relations / Navigations
 - [x] Enums
-- [ ] Lookup-Tables
-- [ ] Value Objects
+- [x] Lookup-Tables
+- [x] Value Objects
 
 ### Service:
 * mind. 2 Services
