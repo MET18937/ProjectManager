@@ -1,16 +1,15 @@
 using Bogus;
 using Microsoft.EntityFrameworkCore;
-using MvcProject.WebApplication.Data;
+using Microsoft.Extensions.DependencyInjection;
+using ProjectManager.DomainModel.Models;
 
-namespace MvcProject.WebApplication.Models
+namespace ProjectManager.Infrastructure
 {
     public class SeedData
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
-            using (var context = new MvcProjectWebApplicationContext(
-                serviceProvider.GetRequiredService<
-                    DbContextOptions<MvcProjectWebApplicationContext>>()))
+            using (var context = new ProjectManagerContext(serviceProvider.GetRequiredService<DbContextOptions<ProjectManagerContext>>()))
             {
                 // delete all data 
                 context.Database.ExecuteSqlRaw("DELETE FROM StudentHasProject");
