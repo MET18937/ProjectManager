@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectManager.Repository",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectManager.Repository.Test", "test\ProjectManager.Repository.Test\ProjectManager.Repository.Test.csproj", "{3673BEF3-D3B5-4268-9AB2-1FB56E36125F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectManager.Application", "src\ProjectManager.Application\ProjectManager.Application.csproj", "{203AA441-BBCF-4690-8952-361F75AD0913}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjectManager.Application", "src\ProjectManager.Application\ProjectManager.Application.csproj", "{203AA441-BBCF-4690-8952-361F75AD0913}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
