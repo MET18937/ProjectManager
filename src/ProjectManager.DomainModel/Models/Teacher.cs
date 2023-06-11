@@ -1,6 +1,6 @@
 using ProjectManager.DomainModel.Models;
 
-namespace ProjectManager.ComainModel.Models
+namespace ProjectManager.DomainModel.Models
 {
     public class Teacher : EntityBase
     {
@@ -29,6 +29,18 @@ namespace ProjectManager.ComainModel.Models
                 }
             }
             return false;
+        }
+
+        public Teacher()
+        {
+        }
+
+        public Teacher(string? firstname, string? lastname, string? email, List<Supervisor> supervisors)
+        {
+            Firstname = firstname;
+            Lastname = lastname;
+            Email = email;
+            _supervisors = supervisors;
         }
     }
 }

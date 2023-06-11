@@ -1,6 +1,6 @@
 using ProjectManager.DomainModel.Models;
 using System.ComponentModel.DataAnnotations.Schema;
-namespace ProjectManager.ComainModel.Models
+namespace ProjectManager.DomainModel.Models
 {
     public class StudentHasProject : EntityBase
     {
@@ -17,9 +17,30 @@ namespace ProjectManager.ComainModel.Models
 
 
 
+        // TDD logic
+        public bool IsAssignedToStudent()
+        {
+            return StudentNavigationId != null;
+        }
 
+        public bool IsAssignedToProject()
+        {
+            return ProjectNavigationId != null;
+        }
 
+        // constructor
+        public StudentHasProject()
+        {
+        }
 
-
+        public StudentHasProject(int? studentId, int? projectId, int? studentNavigationId, Student studentNavigation, int? projectNavigationId, Project projectNavigation)
+        {
+            StudentId = studentId;
+            ProjectId = projectId;
+            StudentNavigationId = studentNavigationId;
+            StudentNavigation = studentNavigation;
+            ProjectNavigationId = projectNavigationId;
+            ProjectNavigation = projectNavigation;
+        }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ProjectManager.ComainModel.Models
+namespace ProjectManager.DomainModel.Models
 {
     public class Company : EntityBase
     {
@@ -26,8 +26,22 @@ namespace ProjectManager.ComainModel.Models
         {
             return Projects.Count > 0;
         }
-        
 
+
+        public Company()
+        {
+        }
+        public Company(string? name, string? address, string? email, string? city, string? region, string? postalCode, string? country, List<Project> projects)
+        {
+            Name = name;
+            Address = address;
+            Email = email;
+            City = city;
+            Region = region;
+            PostalCode = postalCode;
+            Country = country;
+            _projects = projects;
+        }
     }
 
 

@@ -1,6 +1,6 @@
 using ProjectManager.DomainModel.Models;
 
-namespace ProjectManager.ComainModel.Models
+namespace ProjectManager.DomainModel.Models
 {
     public class Student : EntityBase
     {
@@ -30,5 +30,16 @@ namespace ProjectManager.ComainModel.Models
             return false;
         }
 
+        public Student()
+        {
+        }
+
+        public Student(string? firstname, string? lastname, string? email, List<StudentHasProject> studentHasProjects)
+        {
+            Firstname = firstname;
+            Lastname = lastname;
+            Email = email;
+            _studentHasProjects = studentHasProjects;
+        }
     }
 }

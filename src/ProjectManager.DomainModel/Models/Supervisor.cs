@@ -2,7 +2,7 @@ using ProjectManager.DomainModel.Models;
 using System.ComponentModel.DataAnnotations.Schema;
 
 
-namespace ProjectManager.ComainModel.Models
+namespace ProjectManager.DomainModel.Models
 {
     public class Supervisor : EntityBase
     {
@@ -19,7 +19,17 @@ namespace ProjectManager.ComainModel.Models
             return TeacherNavigationId != null;
         }
 
+        // constructor
+        public Supervisor()
+        {
+        }
 
-
+        public Supervisor(string? description, int? teacherId, int? teacherNavigationId, Teacher teacherNavigation)
+        {
+            Description = description;
+            TeacherId = teacherId;
+            TeacherNavigationId = teacherNavigationId;
+            TeacherNavigation = teacherNavigation;
+        }
     }
 }

@@ -1,6 +1,6 @@
 using ProjectManager.DomainModel.Models;
 using System.ComponentModel.DataAnnotations.Schema;
-namespace ProjectManager.ComainModel.Models
+namespace ProjectManager.DomainModel.Models
 {
     public class Project : EntityBase
     {
@@ -34,5 +34,22 @@ namespace ProjectManager.ComainModel.Models
         }
 
 
+        public Project()
+        {
+        }
+
+        public Project(string? title, string? description, DateTime submitDate, int? supervisorNavigationId, Supervisor supervisorNavigation, int? companyNavigationId, Company companyNavigation, int? teacherNavigationId, Teacher teacherNavigation, List<StudentHasProject> studenthasprojects)
+        {
+            Title = title;
+            Description = description;
+            SubmitDate = submitDate;
+            SupervisorNavigationId = supervisorNavigationId;
+            SupervisorNavigation = supervisorNavigation;
+            CompanyNavigationId = companyNavigationId;
+            CompanyNavigation = companyNavigation;
+            TeacherNavigationId = teacherNavigationId;
+            TeacherNavigation = teacherNavigation;
+            _studenthasprojects = studenthasprojects;
+        }
     }
 }
