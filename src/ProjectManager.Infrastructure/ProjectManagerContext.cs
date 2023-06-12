@@ -21,7 +21,10 @@ namespace ProjectManager.Infrastructure
 
         public ProjectManagerContext(DbContextOptions options) : base(options)
         {
+            Database.EnsureDeleted();
             Database.EnsureCreated();
+            // fill with data
+            Seed();
         }
 
         // 3. Onconfiguring

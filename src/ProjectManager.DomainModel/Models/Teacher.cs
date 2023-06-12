@@ -9,7 +9,7 @@ namespace ProjectManager.DomainModel.Models
         public string? Email { get; set; }
 
         // supervisor reference navigation
-        public List<Supervisor> Supervisors { get; set; }
+        public List<Supervisor> Supervisors { get; set; } = new();
 
 
         // TDD logic
