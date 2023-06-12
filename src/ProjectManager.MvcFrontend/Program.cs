@@ -15,6 +15,8 @@ builder.Services.AddControllersWithViews();
 // Services
 builder.Services.AddEd("Data Source=ProjectManager.db");
 builder.Services.AddScoped<ITeachersService, TeachersService>();
+builder.Services.AddScoped<IStudentService, StudentService>();
+
 
 
 var app = builder.Build();
