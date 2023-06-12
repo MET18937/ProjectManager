@@ -7,7 +7,7 @@ namespace ProjectManager.Infrastructure
     public class ProjectManagerContext : DbContext
     {
         // 1. Tabellen Entities mappen
-        public DbSet<Company> Companys => Set<Company>();
+        public DbSet<Company> Companies => Set<Company>();
         public DbSet<Teacher> Teachers => Set<Teacher>();
         public DbSet<Student> Students => Set<Student>();
         public DbSet<Supervisor> Supervisors => Set<Supervisor>();
@@ -21,6 +21,7 @@ namespace ProjectManager.Infrastructure
 
         public ProjectManagerContext(DbContextOptions options) : base(options)
         {
+            Database.EnsureCreated();
         }
 
         // 3. Onconfiguring
@@ -60,7 +61,7 @@ namespace ProjectManager.Infrastructure
                 .RuleFor(c => c.PostalCode, f => f.Address.ZipCode())
                 .RuleFor(c => c.Country, f => f.Address.Country())
                 .Generate(100).ToList();
-            Companys.AddRange(companys);
+            Companies.AddRange(companys);
             SaveChanges();
 
 

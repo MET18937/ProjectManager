@@ -12,6 +12,8 @@ namespace ProjectManager.DomainModel.Test
             DbContextOptionsBuilder options = new DbContextOptionsBuilder();
             options.UseSqlite("Data Source=ProjectManager_Test.db");
             ProjectManagerContext db = new ProjectManagerContext(options.Options);
+            db.Database.EnsureDeleted();
+            db.Database.EnsureCreated();
             return db;
         }
 
@@ -32,11 +34,11 @@ namespace ProjectManager.DomainModel.Test
             Company newCompany = new Company("Testfirma", "Teststrasse 1", "testfirma@example.com", "Teststadt", "Testregion", "12345", "Testland");
 
             // 2. Act
-            db.Companys.Add(newCompany);
+            db.Companies.Add(newCompany);
             db.SaveChanges();
 
             // 3. Assert
-            Assert.Equal(1, db.Companys.Count());
+            Assert.Equal(1, db.Companies.Count());
         }
 
 
