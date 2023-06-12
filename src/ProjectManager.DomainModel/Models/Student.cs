@@ -13,16 +13,6 @@ namespace ProjectManager.DomainModel.Models
         public virtual IReadOnlyList<StudentHasProject> StudentHasProjects => _studentHasProjects;
 
 
-        // get all project that are assigned to student
-        public List<Project> GetProjects()
-        {
-            List<Project> projects = new();
-            foreach (var studentHasProject in StudentHasProjects)
-            {
-                projects.Add(studentHasProject.ProjectNavigation);
-            }
-            return projects;
-        }
 
 
         public Student()

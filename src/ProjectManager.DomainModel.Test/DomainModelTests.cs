@@ -12,9 +12,6 @@ namespace ProjectManager.DomainModel.Test
             DbContextOptionsBuilder options = new DbContextOptionsBuilder();
             options.UseSqlite("Data Source=ProjectManager_Test.db");
             ProjectManagerContext db = new ProjectManagerContext(options.Options);
-            db.Database.EnsureDeleted();
-            db.Database.EnsureCreated();
-            //db.Seed();
             return db;
         }
 

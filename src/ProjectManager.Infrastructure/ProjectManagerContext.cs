@@ -7,12 +7,12 @@ namespace ProjectManager.Infrastructure
     public class ProjectManagerContext : DbContext
     {
         // 1. Tabellen Entities mappen
-        public DbSet<Project> Projects => Set<Project>();
         public DbSet<Company> Companys => Set<Company>();
-        public DbSet<Student> Students => Set<Student>();
-        public DbSet<StudentHasProject> StudentHasProjects => Set<StudentHasProject>();
-        public DbSet<Supervisor> Supervisors => Set<Supervisor>();
         public DbSet<Teacher> Teachers => Set<Teacher>();
+        public DbSet<Student> Students => Set<Student>();
+        public DbSet<Supervisor> Supervisors => Set<Supervisor>();
+        public DbSet<Project> Projects => Set<Project>();
+        public DbSet<StudentHasProject> StudentHasProjects => Set<StudentHasProject>();
 
         // 2. construcotr
         public ProjectManagerContext()

@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ProjectManager.Application\ProjectManager.Application.csproj" />
     <ProjectReference Include="..\ProjectManager.DomainModel\ProjectManager.DomainModel.csproj" />
     <ProjectReference Include="..\ProjectManager.Infrastructure\ProjectManager.Infrastructure.csproj" />
   </ItemGroup>

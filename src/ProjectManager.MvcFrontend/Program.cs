@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using ProjectManager.Application.Services;
+using ProjectManager.DomainModel.Interfaces;
 using ProjectManager.DomainModel.Models;
 using ProjectManager.Infrastructure;
 using System.Reflection;
@@ -10,7 +12,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Services
 builder.Services.AddEd("Data Source=ProjectManager.db");
+builder.Services.AddScoped<ITeachersService, TeachersService>();
+
 
 var app = builder.Build();
 

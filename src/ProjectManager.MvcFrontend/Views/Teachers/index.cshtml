@@ -1,6 +1,35 @@
+@using ProjectManager.DomainModel.Models;
+@model List<Teacher>
+
 @{
 }
 
 <div class="text-center">
 	<h1 class="display-4">Welcome Teacher</h1>
 </div>
+
+@*Represent the data as a table from service*@
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Id</th>
+			<th>FirstName</th>
+			<th>Lastname</th>
+			<th>Email</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var teacher in Model)
+		{
+			<tr>
+				<td>@teacher.Id</td>
+				<td>@teacher.Firstname</td>
+				<td>@teacher.Lastname</td>
+				<td>@teacher.Email</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+
+
