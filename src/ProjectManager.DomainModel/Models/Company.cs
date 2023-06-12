@@ -16,8 +16,7 @@ namespace ProjectManager.DomainModel.Models
         public string? Country { get; set; }
 
         // project list reference
-        public List<Project> _projects { get; set; } = new();
-        public virtual IReadOnlyList<Project> Projects => _projects;
+        public List<Project>? Projects{ get; set; } =new();
 
 
 

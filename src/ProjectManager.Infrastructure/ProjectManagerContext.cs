@@ -34,10 +34,8 @@ namespace ProjectManager.Infrastructure
         }
 
         // 4. OnModelCreating
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // the fluent API way
             modelBuilder.Entity<Company>().HasKey(c => c.Id);
             modelBuilder.Entity<Project>().HasKey(p => p.Id);
             modelBuilder.Entity<Student>().HasKey(s => s.Id);
@@ -50,6 +48,7 @@ namespace ProjectManager.Infrastructure
         public void Seed()
         {
             Randomizer.Seed = new Random(181025);
+
 
             // Company DATA
             List<Company> companys = new Faker<Company>("de_AT")
@@ -95,17 +94,17 @@ namespace ProjectManager.Infrastructure
                 .RuleFor(p => p.Title, f => f.Name.JobTitle())
                 .RuleFor(p => p.Description, f => f.Lorem.Paragraph())
                 .RuleFor(p => p.SubmitDate, f => f.Date.Past())
-                .RuleFor(p => p.CompanyNavigationId, f => f.Random.Number(1, companys.Count))
-                .RuleFor(p => p.SupervisorNavigationId, f => f.Random.Number(1, supervisors.Count))
-                .RuleFor(p => p.TeacherNavigationId, f => f.Random.Number(1, teachers.Count)).Generate(100).ToList();
+                .RuleFor(p => p.CompanyId, f => f.Random.Number(1, companys.Count))
+                .RuleFor(p => p.SupervisorId, f => f.Random.Number(1, supervisors.Count))
+                .RuleFor(p => p.TeacherId, f => f.Random.Number(1, teachers.Count)).Generate(100).ToList();
             Projects.AddRange(projects);
             SaveChanges();
 
 
             // StudentHasProject DATA
             List<StudentHasProject> studentHasProjects = new Faker<StudentHasProject>("de_AT")
-                .RuleFor(s => s.StudentNavigationId, f => f.Random.Number(1, students.Count))
-                .RuleFor(s => s.ProjectNavigationId, f => f.Random.Number(1, projects.Count)).Generate(100).ToList();
+                .RuleFor(s => s.StudentId, f => f.Random.Number(1, students.Count))
+                .RuleFor(s => s.ProjectId, f => f.Random.Number(1, projects.Count)).Generate(100).ToList();
             StudentHasProjects.AddRange(studentHasProjects);
             SaveChanges();
 

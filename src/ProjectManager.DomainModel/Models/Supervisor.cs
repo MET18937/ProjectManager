@@ -11,7 +11,13 @@ namespace ProjectManager.DomainModel.Models
 
         //teacher navigation reference
         public int? TeacherNavigationId { get; set; }
-        public virtual Teacher TeacherNavigation { get; set; } = default!;
+        public Teacher Teacher { get; set; } = default!;
+
+        // project list reference
+        public List<Project> Projects { get; set; } = new();
+
+
+
 
         // TDD logic
         public bool IsAssignedToTeacher()
@@ -24,16 +30,16 @@ namespace ProjectManager.DomainModel.Models
         {
         }
 
-        public Supervisor(string? description, Teacher teacherNavigation)
+        public Supervisor(string? description, Teacher teacher)
         {
             Description = description;
-            TeacherNavigation = teacherNavigation;
+            Teacher = teacher;
         }
-        public Supervisor(int id, string? description, Teacher teacherNavigation)
+        public Supervisor(int id, string? description, Teacher teacher)
         {
             Id = id;
             Description = description;
-            TeacherNavigation = teacherNavigation;
+            Teacher = teacher;
         }
     }
 }

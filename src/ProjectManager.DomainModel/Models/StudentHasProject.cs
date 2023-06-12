@@ -5,24 +5,24 @@ namespace ProjectManager.DomainModel.Models
     public class StudentHasProject : EntityBase
     {
         // student navigation reference
-        public int? StudentNavigationId { get; set; }
-        public virtual Student StudentNavigation { get; set; } = default!;
+        public int? StudentId { get; set; }
+        public  Student Student { get; set; } = default!;
 
         // project navigation reference
-        public int? ProjectNavigationId { get; set; }
-        public virtual Project ProjectNavigation { get; set; } = default!;
+        public int? ProjectId { get; set; }
+        public  Project Project { get; set; } = default!;
 
 
 
         // TDD logic
         public bool IsAssignedToStudent()
         {
-            return StudentNavigationId != null;
+            return StudentId != null;
         }
 
         public bool IsAssignedToProject()
         {
-            return ProjectNavigationId != null;
+            return ProjectId != null;
         }
 
         // constructor
@@ -30,17 +30,17 @@ namespace ProjectManager.DomainModel.Models
         {
         }
 
-        public StudentHasProject(Student studentNavigation, Project projectNavigation)
+        public StudentHasProject(Student student, Project project)
         {
-            StudentNavigation = studentNavigation;
-            ProjectNavigation = projectNavigation;
+            Student = student;
+            Project = project;
         }
 
-        public StudentHasProject(int id, Student studentNavigation, Project projectNavigation)
+        public StudentHasProject(int id, Student student, Project project)
         {
             Id = id;
-            StudentNavigation = studentNavigation;
-            ProjectNavigation = projectNavigation;
+            Student = student;
+            Project= project;
         }
 
 

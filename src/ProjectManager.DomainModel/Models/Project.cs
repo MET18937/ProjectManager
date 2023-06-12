@@ -10,18 +10,19 @@ namespace ProjectManager.DomainModel.Models
         public Projectstates Projectstate { get; set; }
 
         // supervisor navigation reference
-        public int? SupervisorNavigationId { get; set; }
-        public virtual Supervisor SupervisorNavigation { get; set; } = default!;
+        public int? SupervisorId { get; set; }
+        public Supervisor Supervisor { get; set; } = default!;
+
         // company navigation reference
-        public int? CompanyNavigationId { get; set; }
-        public virtual Company CompanyNavigation { get; set; } = default!;
+        public int? CompanyId { get; set; }
+        public Company Company { get; set; } = default!;
+
         // teacher navigation reference
-        public int? TeacherNavigationId { get; set; }
-        public virtual Teacher TeacherNavigation { get; set; } = default!;
+        public int? TeacherId { get; set; }
+        public Teacher Teacher { get; set; } = default!;
 
         // studenthasproject list reference
-        public List<StudentHasProject> _studenthasprojects { get; set; } = new();
-        public virtual IReadOnlyList<StudentHasProject> StudentHasProjects => _studenthasprojects;
+        public List<StudentHasProject> Studenthasprojects { get; set; } = new();
 
         // TDD logic
         public bool IsSubmitted()
@@ -39,26 +40,38 @@ namespace ProjectManager.DomainModel.Models
         {
         }
 
-        public Project(string? title, string? description, DateTime submitDate, Projectstates projectstate, Supervisor supervisorNavigation, Company companyNavigation, Teacher teacherNavigation)
+        public Project(string? title, string? description, DateTime submitDate, Projectstates projectstate, Supervisor supervisor, Company company, Teacher teacher)
         {
             Title = title;
             Description = description;
             SubmitDate = submitDate;
             Projectstate = projectstate;
-            SupervisorNavigation = supervisorNavigation;
-            CompanyNavigation = companyNavigation;
-            TeacherNavigation = teacherNavigation;
+            Supervisor = supervisor;
+            Company = company;
+            Teacher = teacher;
         }
-        public Project(int id, string? title, string? description, DateTime submitDate, Projectstates projectstate, Supervisor supervisorNavigation, Company companyNavigation, Teacher teacherNavigation)
+        public Project(int id, string? title, string? description, DateTime submitDate, Projectstates projectstate, Supervisor supervisor, Company company, Teacher teacher)
         {
             Id = id;
             Title = title;
             Description = description;
             SubmitDate = submitDate;
             Projectstate = projectstate;
-            SupervisorNavigation = supervisorNavigation;
-            CompanyNavigation = companyNavigation;
-            TeacherNavigation = teacherNavigation;
+            Supervisor = supervisor;
+            Company = company;
+            Teacher = teacher;
+        }
+        public Project(int id, string? title, string? description, DateTime submitDate, Projectstates projectstate, Supervisor supervisor, Company company, Teacher teacher, List<StudentHasProject> studenthasprojects)
+        {
+            Id = id;
+            Title = title;
+            Description = description;
+            SubmitDate = submitDate;
+            Projectstate = projectstate;
+            Supervisor = supervisor;
+            Company = company;
+            Teacher = teacher;
+            Studenthasprojects = studenthasprojects;
         }
     }
 }

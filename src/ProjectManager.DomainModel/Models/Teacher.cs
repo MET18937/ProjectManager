@@ -9,8 +9,7 @@ namespace ProjectManager.DomainModel.Models
         public string? Email { get; set; }
 
         // supervisor reference navigation
-        public List<Supervisor> _supervisors { get; set; } = new();
-        public virtual IReadOnlyList<Supervisor> Supervisors => _supervisors;
+        public List<Supervisor> Supervisors { get; set; }
 
 
         // TDD logic

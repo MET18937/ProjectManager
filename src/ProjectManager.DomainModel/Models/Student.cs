@@ -9,8 +9,7 @@ namespace ProjectManager.DomainModel.Models
         public string? Email { get; set; }
 
         // studentHasProject list reference 
-        public List<StudentHasProject> _studentHasProjects { get; set; } = new();
-        public virtual IReadOnlyList<StudentHasProject> StudentHasProjects => _studentHasProjects;
+        public List<StudentHasProject> StudentHasProjects { get; set; } = new();
 
 
 
