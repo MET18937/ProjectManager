@@ -28,14 +28,14 @@
 * [ ] C.R.U.D. + Fluent-API oder Mediator + C.Q.S. oder etwas anderes
 
 ### Unit Tests:
-* [ ] Domain Model: pro Entity mind. 1 Success_Test
-* [ ] Services: Alle Create/Update/Delete-Method Test Driven (TDD) implementieren (100%ige Code-Abdeckung), ohne Mocking
+* [x] Domain Model: pro Entity mind. 1 Success_Test
+* [s] Services: Alle Create/Update/Delete-Method Test Driven (TDD) implementieren (100%ige Code-Abdeckung), ohne Mocking
 
 ### Repository:
-* [ ] generisches Repo, und/oder spezialisierte Repos
+* [x] generisches Repo, und/oder spezialisierte Repos
 
 ### Controller:
-* [ ] mind. 2
+* [x] mind. 2
 * [ ] Alle Service Methoden auch in (mehreren) Controllern abbilden
 
 ### UI:

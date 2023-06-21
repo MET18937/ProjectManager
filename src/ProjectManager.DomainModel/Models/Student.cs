@@ -18,14 +18,14 @@ namespace ProjectManager.DomainModel.Models
         {
         }
 
-        public Student(string? firstname, string? lastname, string? email)
+        public Student(string firstname, string lastname, string email)
         {
             Firstname = firstname;
             Lastname = lastname;
             Email = email;
         }
 
-        public Student(int id, string? firstname, string? lastname, string? email)
+        public Student(int id, string firstname, string lastname, string email)
         {
             Id = id;
             Firstname = firstname;
