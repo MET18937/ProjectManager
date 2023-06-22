@@ -16,7 +16,7 @@ namespace ProjectManager.MvcFrontend.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<TeacherDto> teachers = _teachersService.GetAll();
+            IEnumerable<Teacher> teachers = _teachersService.GetAll();
             return View(teachers);
         }
     }

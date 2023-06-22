@@ -15,7 +15,7 @@ namespace ProjectManager.Application.Services
             PageNumber = pageNumber;
         }
 
-        public IQueryable<StudentDto> Apply(IQueryable<StudentDto> students)
+        public IQueryable<Student> Apply(IQueryable<Student> students)
         {
             if (!String.IsNullOrEmpty(SearchString))
             {

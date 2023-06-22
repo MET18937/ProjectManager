@@ -13,7 +13,7 @@ namespace ProjectManager.Application.Services
             _context = context;
         }
 
-        public void Add(TeacherDto teacher)
+        public void Add(Teacher teacher)
         {
             throw new NotImplementedException();
         }
@@ -23,18 +23,18 @@ namespace ProjectManager.Application.Services
             throw new NotImplementedException();
         }
 
-        public  IEnumerable<TeacherDto> GetAll()
+        public  IEnumerable<Teacher> GetAll()
         {
             var data =  _context.Teachers.ToList();
             return data;
         }
 
-        public TeacherDto GetById(int id)
+        public Teacher GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(TeacherDto teacher)
+        public void Update(Teacher teacher)
         {
             throw new NotImplementedException();
         }
