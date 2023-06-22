@@ -53,7 +53,7 @@ Abgabe auf GIT + Präsentation. Möglichst viele pushes über den Zeitraum verte
 * [ ] Filterung nach einem Freitextfeld, einem Datumsraum UND einer Drop-Down-Box. Jedes davon optional
 * [ ] Volltextsuche mit Fehlerkorrektur in einer Tabelle, z.B. Namen
 * [ ] Erhöhung der Anzahl der Prüfungen in den Service-Methoden (Add/Update/Delete)
-* [ ] DTO Mapping
+* [x] DTO Mapping
 * [ ] Ein Service benutzt einen anderen Service zur Datenvalidierung (z.B. StockService prüft Lagerbestände)
 * [ ] Über die Angabe hinaus, eine weiterer Service mit Add- Update- Delete-Methode
 * [ ] Umsetzung mittels C.Q.R.S. und MediatR (C.Q.R.S.- und Mediator-Pattern)

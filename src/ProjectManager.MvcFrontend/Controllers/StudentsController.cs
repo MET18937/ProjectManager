@@ -32,7 +32,7 @@ namespace ProjectManager.MvcFrontend.Controllers
                 searchString = currentFilter;
             }
             IQueryable<StudentDto> students = from s in _context.Students
-                                           select s;
+                                              select s;
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -56,6 +56,61 @@ namespace ProjectManager.MvcFrontend.Controllers
             }
             int pageSize = 10;
             return View(await PaginatedList<StudentDto>.CreateAsync(students.AsNoTracking(), pageNumber ?? 1, pageSize));
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Firstname,Lastname,Email,Id")] StudentDto student)
+        {
+            if (ModelState.IsValid)
+            {
+                _studentService.Add(student);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(student);
+        }
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null || _studentService.GetAll() == null)
+            {
+                return NotFound();
+            }
+            var student = _studentService.GetById(id.Value);
+            if (student == null)
+            {
+                return NotFound();
+            }
+            return View(student);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Firstname,Lastname,Email,Id")] StudentDto student)
+        {
+            if (id != student.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _studentService.Update(student);
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    throw;
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(student);
         }
     }
 }

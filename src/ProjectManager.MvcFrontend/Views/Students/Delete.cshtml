@@ -9,10 +9,6 @@
 	<h1 class="display-4">Welcome Student</h1>
 </div>
 
-<p>
-	<a asp-action="Create">Create New</a>
-</p>
-
 <form asp-action="Index" method="get">
 	<div class="form-actions no-color">
 		<p>
@@ -33,7 +29,6 @@
 			<th><a asp-action="Index" asp-route-sortOrder="@ViewData["LastnameSortParm"]">Lastname</a></th>
 			@*<th>Lastname</th>k*@
 			<th>Email</th>
-			<th></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -44,11 +39,6 @@
 				<td>@student.Firstname</td>
 				<td>@student.Lastname</td>
 				<td>@student.Email</td>
-				<td>
-					<a asp-action="Edit" asp-route-id="@student.Id">Edit</a>
-					<a asp-action="Details" asp-route-id="@student.Id">Details</a>
-					<a asp-action="Delete" asp-route-id="@student.Id">Delete</a>
-				</td>
 			</tr>
 		}
 	</tbody>
