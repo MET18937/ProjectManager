@@ -1,5 +1,6 @@
-namespace MvcProject.WebApplication.Models
+namespace ProjectManager.MvcFrontend
 {
+
     public class ErrorViewModel
     {
         public string? RequestId { get; set; }

@@ -25,7 +25,7 @@
   * [x] Create: mind. 5 Bedingungen (LinQ) prüfen (Bedingungen sollen prüfen, ob ein Datensatz angelegt werden darf)
   * [x] Update: mind. 2 Bedingungen (LinQ) prüfen (Bedingungen sollen prüfen, ob ein Datensatz geändert werden darf)
 * [ ] Filtering / Sorting / Paging implementieren
-* [ ] C.R.U.D. + Fluent-API oder Mediator + C.Q.S. oder etwas anderes
+* [x] C.R.U.D. + Fluent-API oder Mediator + C.Q.S. oder etwas anderes
 
 ### Unit Tests:
 * [x] Domain Model: pro Entity mind. 1 Success_Test
