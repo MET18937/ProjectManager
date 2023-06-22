@@ -29,7 +29,7 @@
 
 ### Unit Tests:
 * [x] Domain Model: pro Entity mind. 1 Success_Test
-* [s] Services: Alle Create/Update/Delete-Method Test Driven (TDD) implementieren (100%ige Code-Abdeckung), ohne Mocking
+* [x] Services: Alle Create/Update/Delete-Method Test Driven (TDD) implementieren (100%ige Code-Abdeckung), ohne Mocking
 
 ### Repository:
 * [x] generisches Repo, und/oder spezialisierte Repos
