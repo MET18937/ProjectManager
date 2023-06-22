@@ -9,7 +9,7 @@ namespace ProjectManager.DomainModel.Interfaces
 {
     public interface ITeachersService
     {
-        IEnumerable<Teacher> GetAll();
+        IQueryable<TeacherDto> GetAll();
         Teacher GetById(int id);
         void Add(Teacher teacher);
         void Update(Teacher teacher);

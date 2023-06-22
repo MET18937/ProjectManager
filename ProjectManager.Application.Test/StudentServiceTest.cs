@@ -101,7 +101,7 @@ namespace ProjectManager.Application.Test
             studentService.Add(student);
 
             // act
-            IEnumerable<Student> students = studentService.GetAll();
+            IQueryable<StudentDto> students = studentService.GetAll();
 
             // assert
             Assert.Equal(1, students.Count());

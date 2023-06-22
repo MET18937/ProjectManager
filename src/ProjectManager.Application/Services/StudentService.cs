@@ -58,9 +58,15 @@ namespace ProjectManager.Application.Services
             _context.SaveChanges();
         }
 
-        public IQueryable<Student> GetAll()
+        public IQueryable<StudentDto> GetAll()
         {
-            return _context.Students;
+            return _context.Students.Select(s => new StudentDto
+            {
+                Id = s.Id,
+                Firstname = s.Firstname,
+                Lastname = s.Lastname,
+                Email = s.Email
+            });
         }
 
         public Student GetById(int id) => _context.Students.Find(id);

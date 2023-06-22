@@ -23,10 +23,15 @@ namespace ProjectManager.Application.Services
             throw new NotImplementedException();
         }
 
-        public  IEnumerable<Teacher> GetAll()
+        public IQueryable<TeacherDto> GetAll()
         {
-            var data =  _context.Teachers.ToList();
-            return data;
+            return _context.Teachers.Select(t => new TeacherDto
+            {
+                Id = t.Id,
+                Firstname = t.Firstname,
+                Lastname = t.Lastname,
+                Email = t.Email,
+            });
         }
 
         public Teacher GetById(int id)
@@ -39,6 +44,6 @@ namespace ProjectManager.Application.Services
             throw new NotImplementedException();
         }
 
-       
+
     }
 }

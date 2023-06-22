@@ -12,7 +12,7 @@ namespace ProjectManager.Application.Services
             SortOrder = sortOrder;
         }
 
-        public IQueryable<Student> Apply(IQueryable<Student> students)
+        public IQueryable<StudentDto> Apply(IQueryable<StudentDto> students)
         {
             switch (SortOrder)
             {

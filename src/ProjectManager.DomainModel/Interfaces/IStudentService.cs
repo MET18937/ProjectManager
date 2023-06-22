@@ -9,7 +9,7 @@ namespace ProjectManager.DomainModel.Interfaces
 {
     public interface IStudentService
     {
-        IQueryable<Student> GetAll();
+        IQueryable<StudentDto> GetAll();
         Student GetById(int id);
         void Add(Student student);
         void Update(Student student);

@@ -41,7 +41,7 @@ namespace ProjectManager.MvcFrontend.Controllers
             students = studentSearchService.Apply(students);
 
             int pageSize = 10;
-            return View(await PaginatedList<Student>.CreateAsync(students.AsNoTracking(), pageNumber ?? 1, pageSize));
+            return View(await PaginatedList<StudentDto>.CreateAsync(students.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
 
