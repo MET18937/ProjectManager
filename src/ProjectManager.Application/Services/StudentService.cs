@@ -25,7 +25,7 @@ namespace ProjectManager.Application.Services
         //}
 
 
-        public void Add(Student student)
+        public void Add(StudentDto student)
         {
             // Create: mind. 5 Bedingungen (LinQ) prüfen (Bedingungen sollen prüfen, ob ein Datensatz angelegt werden darf)
             // 1. Prüfen, ob der Student bereits existiert
@@ -59,15 +59,15 @@ namespace ProjectManager.Application.Services
             _context.SaveChanges();
         }
 
-        public IEnumerable<Student> GetAll()
+        public IEnumerable<StudentDto> GetAll()
         {
             var data = _context.Students.ToList();
             return data;
         }
 
-        public Student GetById(int id) => _context.Students.Find(id);
+        public StudentDto GetById(int id) => _context.Students.Find(id);
 
-        public void Update(Student student)
+        public void Update(StudentDto student)
         {
             // Update: mind. 2 Bedingungen(LinQ) prüfen(Bedingungen sollen prüfen, ob ein Datensatz geändert werden darf)
 

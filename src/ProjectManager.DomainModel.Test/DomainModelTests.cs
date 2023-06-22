@@ -31,7 +31,7 @@ namespace ProjectManager.DomainModel.Test
         {
             // 1. Arrange
             ProjectManagerContext db = CreateDb();
-            Company newCompany = new Company("Testfirma", "Teststrasse 1", "testfirma@example.com", "Teststadt", "Testregion", "12345", "Testland");
+            CompanyDto newCompany = new Company("Testfirma", "Teststrasse 1", "testfirma@example.com", "Teststadt", "Testregion", "12345", "Testland");
 
             // 2. Act
             db.Companies.Add(newCompany);
@@ -49,7 +49,7 @@ namespace ProjectManager.DomainModel.Test
 
             // 1. Arrange
             ProjectManagerContext db = CreateDb();
-            Student newStudent = new Student("Testvorname", "Testnachname", "teststudent@example.com");
+            StudentDto newStudent = new Student("Testvorname", "Testnachname", "teststudent@example.com");
 
             // 2. Act
             db.Students.Add(newStudent);
@@ -64,7 +64,7 @@ namespace ProjectManager.DomainModel.Test
         {
             // 1. Arrange
             ProjectManagerContext db = CreateDb();
-            Teacher newTeacher = new Teacher("Testvorname", "Testnachname", "teacher@example.com");
+            TeacherDto newTeacher = new Teacher("Testvorname", "Testnachname", "teacher@example.com");
 
             // 2. Act
             db.Teachers.Add(newTeacher);
@@ -79,7 +79,7 @@ namespace ProjectManager.DomainModel.Test
         {
             // 1. Arrange
             ProjectManagerContext db = CreateDb();
-            Supervisor newSupervisor = new Supervisor("Beschreibung", null);
+            SupervisorDto newSupervisor = new Supervisor("Beschreibung", null);
 
             // 2. Act
             db.Supervisors.Add(newSupervisor);
@@ -95,7 +95,7 @@ namespace ProjectManager.DomainModel.Test
             // 1. Arrange
             ProjectManagerContext db = CreateDb();
             // datetime example
-            Project newProject = new Project("Testprojekt", "Testbeschreibung", new DateTime(2019, 10, 25), Projectstates.Active, null, null, null);
+            ProjectDto newProject = new Project("Testprojekt", "Testbeschreibung", new DateTime(2019, 10, 25), Projectstates.Active, null, null, null);
 
             // 2. Act
             db.Projects.Add(newProject);
@@ -110,7 +110,7 @@ namespace ProjectManager.DomainModel.Test
         {
             // 1. Arrange
             ProjectManagerContext db = CreateDb();
-            StudentHasProject newStudentHasProject = new StudentHasProject(null, null);
+            StudentHasProjectDto newStudentHasProject = new StudentHasProject(null, null);
 
             // 2. Act
             db.StudentHasProjects.Add(newStudentHasProject);

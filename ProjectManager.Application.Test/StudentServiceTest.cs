@@ -23,7 +23,7 @@ namespace ProjectManager.Application.Test
         {
             // Arrange
             ProjectManagerContext db = CreateDb();
-            Student student = new Student
+            StudentDto student = new Student
             {
                 Firstname = "Maxi",
                 Lastname = "Mustermann",
@@ -43,7 +43,7 @@ namespace ProjectManager.Application.Test
         {
             // Arrange
             ProjectManagerContext db = CreateDb();
-            Student student = new Student
+            StudentDto student = new Student
             {
                 Firstname = "Maxi",
                 Lastname = "Mustermann",
@@ -65,7 +65,7 @@ namespace ProjectManager.Application.Test
             ProjectManagerContext db = CreateDb();
             StudentService studentService = new StudentService(db);
 
-            Student oldStudent = new Student
+            StudentDto oldStudent = new Student
             {
                 Firstname = "Maxi",
                 Lastname = "Mustermann",
@@ -73,7 +73,7 @@ namespace ProjectManager.Application.Test
             };
             studentService.Add(oldStudent);
 
-            Student newStudent = studentService.GetById(1);
+            StudentDto newStudent = studentService.GetById(1);
             newStudent.Firstname = "Hansi";
             newStudent.Lastname = "Müller";
 
@@ -92,7 +92,7 @@ namespace ProjectManager.Application.Test
             ProjectManagerContext db = CreateDb();
             StudentService studentService = new StudentService(db);
 
-            Student student = new Student
+            StudentDto student = new Student
             {
                 Firstname = "Maxi",
                 Lastname = "Mustermann",
@@ -101,7 +101,7 @@ namespace ProjectManager.Application.Test
             studentService.Add(student);
 
             // act
-            IEnumerable<Student> students = studentService.GetAll();
+            IEnumerable<StudentDto> students = studentService.GetAll();
 
             // assert
             Assert.Equal(1, students.Count());
@@ -114,7 +114,7 @@ namespace ProjectManager.Application.Test
             ProjectManagerContext db = CreateDb();
             StudentService studentService = new StudentService(db);
 
-            Student student = new Student
+            StudentDto student = new Student
             {
                 Firstname = "Maxi",
                 Lastname = "Mustermann",
@@ -123,7 +123,7 @@ namespace ProjectManager.Application.Test
             studentService.Add(student);
 
             // act
-            Student readStudent = studentService.GetById(1);
+            StudentDto readStudent = studentService.GetById(1);
 
             // assert
             Assert.Equal("Maxi", readStudent.Firstname);
@@ -141,7 +141,7 @@ namespace ProjectManager.Application.Test
             ProjectManagerContext db = CreateDb();
             StudentService studentService = new StudentService(db);
 
-            Student student = new Student
+            StudentDto student = new Student
             {
                 Firstname = "Maxi",
                 Lastname = "Mustermann",
@@ -162,7 +162,7 @@ namespace ProjectManager.Application.Test
             ProjectManagerContext db = CreateDb();
             StudentService studentService = new StudentService(db);
 
-            Student student = new Student
+            StudentDto student = new Student
             {
                 Firstname = null,
                 Lastname = "Mustermann",
@@ -177,7 +177,7 @@ namespace ProjectManager.Application.Test
             ProjectManagerContext db = CreateDb();
             StudentService studentService = new StudentService(db);
 
-            Student student = new Student
+            StudentDto student = new Student
             {
                 Firstname = "Maxi",
                 Lastname = null,
@@ -193,7 +193,7 @@ namespace ProjectManager.Application.Test
             ProjectManagerContext db = CreateDb();
             StudentService studentService = new StudentService(db);
 
-            Student student = new Student
+            StudentDto student = new Student
             {
                 Firstname = "Maxi",
                 Lastname = "Mustermann",
@@ -210,7 +210,7 @@ namespace ProjectManager.Application.Test
             ProjectManagerContext db = CreateDb();
             StudentService studentService = new StudentService(db);
 
-            Student student = new Student
+            StudentDto student = new Student
             {
                 Firstname = "Maxi",
                 Lastname = "Mustermann",
@@ -227,7 +227,7 @@ namespace ProjectManager.Application.Test
             ProjectManagerContext db = CreateDb();
             StudentService studentService = new StudentService(db);
 
-            Student student = new Student
+            StudentDto student = new Student
             {
                 Firstname = "M",
                 Lastname = "Mustermann",
@@ -243,7 +243,7 @@ namespace ProjectManager.Application.Test
             ProjectManagerContext db = CreateDb();
             StudentService studentService = new StudentService(db);
 
-            Student student = new Student
+            StudentDto student = new Student
             {
                 Firstname = "Maxi",
                 Lastname = "M",
@@ -260,7 +260,7 @@ namespace ProjectManager.Application.Test
             ProjectManagerContext db = CreateDb();
             StudentService studentService = new StudentService(db);
 
-            Student student = new Student
+            StudentDto student = new Student
             {
                 Firstname = " Maxi",
                 Lastname = "Mustermann",
@@ -274,7 +274,7 @@ namespace ProjectManager.Application.Test
         {
             ProjectManagerContext db = CreateDb();
             StudentService studentService = new StudentService(db);
-            Student student = new Student
+            StudentDto student = new Student
             {
                 Firstname = "Maxi ",
                 Lastname = "Mustermann",
@@ -300,7 +300,7 @@ namespace ProjectManager.Application.Test
         {
             ProjectManagerContext db = CreateDb();
             StudentService studentService = new StudentService(db);
-            Student student1 = new Student
+            StudentDto student1 = new Student
             {
                 Firstname = "Maxi",
                 Lastname = "Mustermann",
@@ -308,7 +308,7 @@ namespace ProjectManager.Application.Test
             };
             studentService.Add(student1);
 
-            Student student2 = studentService.GetById(student1.Id);
+            StudentDto student2 = studentService.GetById(student1.Id);
             student2.Email = "MaxiMustiuni.com";
 
             Assert.Throws<Exception>(() => studentService.Update(student2));
@@ -320,7 +320,7 @@ namespace ProjectManager.Application.Test
         {
             ProjectManagerContext db = CreateDb();
             StudentService studentService = new StudentService(db);
-            Student student1 = new Student
+            StudentDto student1 = new Student
             {
                 Firstname = "Max",
                 Lastname = "Mustermann",
@@ -328,7 +328,7 @@ namespace ProjectManager.Application.Test
             };
             studentService.Add(student1);
 
-            Student student2 = studentService.GetById(student1.Id);
+            StudentDto student2 = studentService.GetById(student1.Id);
             student2.Firstname = null;
 
             Assert.Throws<Exception>(() => studentService.Update(student2));
@@ -338,7 +338,7 @@ namespace ProjectManager.Application.Test
         {
             ProjectManagerContext db = CreateDb();
             StudentService studentService = new StudentService(db);
-            Student student1 = new Student
+            StudentDto student1 = new Student
             {
                 Firstname = "Maxi",
                 Lastname = "Must",
@@ -346,7 +346,7 @@ namespace ProjectManager.Application.Test
             };
             studentService.Add(student1);
 
-            Student student2 = studentService.GetById(student1.Id);
+            StudentDto student2 = studentService.GetById(student1.Id);
             student2.Lastname = null;
 
             Assert.Throws<Exception>(() => studentService.Update(student2));
@@ -356,7 +356,7 @@ namespace ProjectManager.Application.Test
         {
             ProjectManagerContext db = CreateDb();
             StudentService studentService = new StudentService(db);
-            Student student1 = new Student
+            StudentDto student1 = new Student
             {
                 Firstname = "Maxi",
                 Lastname = "Mustermann",
@@ -364,7 +364,7 @@ namespace ProjectManager.Application.Test
             };
             studentService.Add(student1);
 
-            Student student2 = studentService.GetById(student1.Id);
+            StudentDto student2 = studentService.GetById(student1.Id);
             student2.Email = null;
 
             Assert.Throws<Exception>(() => studentService.Update(student2));

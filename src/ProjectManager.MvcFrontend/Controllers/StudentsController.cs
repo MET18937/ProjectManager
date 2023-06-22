@@ -17,15 +17,6 @@ namespace ProjectManager.MvcFrontend.Controllers
             _context = context;
         }
 
-        //public IActionResult Index()
-        //{
-        //    IEnumerable<Student> students = _studentService.GetAll();
-        //    return View(students);
-        //}
-
-        // https://learn.microsoft.com/en-us/aspnet/core/data/ef-mvc/sort-filter-page?view=aspnetcore-7.0#add-a-search-box
-        // Add sorting Functionality to the Index method
-
         public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
             ViewData["FirstnameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
@@ -40,7 +31,7 @@ namespace ProjectManager.MvcFrontend.Controllers
             {
                 searchString = currentFilter;
             }
-            IQueryable<Student> students = from s in _context.Students
+            IQueryable<StudentDto> students = from s in _context.Students
                                            select s;
 
             if (!String.IsNullOrEmpty(searchString))
@@ -64,12 +55,7 @@ namespace ProjectManager.MvcFrontend.Controllers
                     break;
             }
             int pageSize = 10;
-            return View(await PaginatedList<Student>.CreateAsync(students.AsNoTracking(), pageNumber ?? 1, pageSize));
+            return View(await PaginatedList<StudentDto>.CreateAsync(students.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
-
-
-
-
-
     }
 }

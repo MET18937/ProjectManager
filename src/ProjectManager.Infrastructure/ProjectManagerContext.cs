@@ -7,12 +7,12 @@ namespace ProjectManager.Infrastructure
     public class ProjectManagerContext : DbContext
     {
         // 1. Tabellen Entities mappen
-        public DbSet<Company> Companies => Set<Company>();
-        public DbSet<Teacher> Teachers => Set<Teacher>();
-        public DbSet<Student> Students => Set<Student>();
-        public DbSet<Supervisor> Supervisors => Set<Supervisor>();
-        public DbSet<Project> Projects => Set<Project>();
-        public DbSet<StudentHasProject> StudentHasProjects => Set<StudentHasProject>();
+        public DbSet<CompanyDto> Companies => Set<CompanyDto>();
+        public DbSet<TeacherDto> Teachers => Set<TeacherDto>();
+        public DbSet<StudentDto> Students => Set<StudentDto>();
+        public DbSet<SupervisorDto> Supervisors => Set<SupervisorDto>();
+        public DbSet<ProjectDto> Projects => Set<ProjectDto>();
+        public DbSet<StudentHasProjectDto> StudentHasProjects => Set<StudentHasProjectDto>();
 
         // 2. construcotr
         public ProjectManagerContext()
@@ -40,12 +40,12 @@ namespace ProjectManager.Infrastructure
         // 4. OnModelCreating
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Company>().HasKey(c => c.Id);
-            modelBuilder.Entity<Project>().HasKey(p => p.Id);
-            modelBuilder.Entity<Student>().HasKey(s => s.Id);
-            modelBuilder.Entity<StudentHasProject>().HasKey(s => s.Id);
-            modelBuilder.Entity<Supervisor>().HasKey(s => s.Id);
-            modelBuilder.Entity<Teacher>().HasKey(s => s.Id);
+            modelBuilder.Entity<CompanyDto>().HasKey(c => c.Id);
+            modelBuilder.Entity<ProjectDto>().HasKey(p => p.Id);
+            modelBuilder.Entity<StudentDto>().HasKey(s => s.Id);
+            modelBuilder.Entity<StudentHasProjectDto>().HasKey(s => s.Id);
+            modelBuilder.Entity<SupervisorDto>().HasKey(s => s.Id);
+            modelBuilder.Entity<TeacherDto>().HasKey(s => s.Id);
         }
 
         // 5. seeding
@@ -55,7 +55,7 @@ namespace ProjectManager.Infrastructure
 
 
             // Company DATA
-            List<Company> companys = new Faker<Company>("de_AT")
+            List<CompanyDto> companys = new Faker<CompanyDto>("de_AT")
                 .RuleFor(c => c.Name, f => f.Company.CompanyName())
                 .RuleFor(c => c.Address, f => f.Address.FullAddress())
                 .RuleFor(c => c.Email, f => f.Internet.Email())
@@ -69,7 +69,7 @@ namespace ProjectManager.Infrastructure
 
 
             // Student DATA
-            List<Student> students = new Faker<Student>("de_AT")
+            List<StudentDto> students = new Faker<StudentDto>("de_AT")
             .RuleFor(s => s.Firstname, f => f.Name.FirstName())
             .RuleFor(s => s.Lastname, f => f.Name.LastName())
             .RuleFor(s => s.Email, f => f.Internet.Email()).Generate(100).ToList();
@@ -77,7 +77,7 @@ namespace ProjectManager.Infrastructure
             SaveChanges();
 
             // Teachers DATA
-            List<Teacher> teachers = new Faker<Teacher>("de_AT")
+            List<TeacherDto> teachers = new Faker<TeacherDto>("de_AT")
             .RuleFor(t => t.Firstname, f => f.Name.FirstName())
             .RuleFor(t => t.Lastname, f => f.Name.LastName())
             .RuleFor(t => t.Email, f => f.Internet.Email()).Generate(100).ToList();
@@ -86,7 +86,7 @@ namespace ProjectManager.Infrastructure
 
             // Supervisor DATA
             // teacher_id t0 random Teacher
-            List<Supervisor> supervisors = new Faker<Supervisor>("de_AT")
+            List<SupervisorDto> supervisors = new Faker<SupervisorDto>("de_AT")
                 .RuleFor(s => s.TeacherId, f => f.Random.Number(1, teachers.Count))
                 .RuleFor(s => s.Description, f => f.Lorem.Paragraph()).Generate(100).ToList();
             Supervisors.AddRange(supervisors);
@@ -94,7 +94,7 @@ namespace ProjectManager.Infrastructure
 
 
             // Projects DATA
-            List<Project> projects = new Faker<Project>("de_AT")
+            List<ProjectDto> projects = new Faker<ProjectDto>("de_AT")
                 .RuleFor(p => p.Title, f => f.Name.JobTitle())
                 .RuleFor(p => p.Description, f => f.Lorem.Paragraph())
                 .RuleFor(p => p.SubmitDate, f => f.Date.Past())
@@ -106,7 +106,7 @@ namespace ProjectManager.Infrastructure
 
 
             // StudentHasProject DATA
-            List<StudentHasProject> studentHasProjects = new Faker<StudentHasProject>("de_AT")
+            List<StudentHasProjectDto> studentHasProjects = new Faker<StudentHasProjectDto>("de_AT")
                 .RuleFor(s => s.StudentId, f => f.Random.Number(1, students.Count))
                 .RuleFor(s => s.ProjectId, f => f.Random.Number(1, projects.Count)).Generate(100).ToList();
             StudentHasProjects.AddRange(studentHasProjects);
