@@ -50,7 +50,6 @@ namespace ProjectManager.Application.Services
 
             _context.Students.Add(student);
             _context.SaveChanges();
-
         }
 
         public void Delete(int id)
@@ -59,10 +58,9 @@ namespace ProjectManager.Application.Services
             _context.SaveChanges();
         }
 
-        public IEnumerable<StudentDto> GetAll()
+        public IQueryable<StudentDto> GetAll()
         {
-            var data = _context.Students.ToList();
-            return data;
+            return _context.Students;
         }
 
         public StudentDto GetById(int id) => _context.Students.Find(id);
