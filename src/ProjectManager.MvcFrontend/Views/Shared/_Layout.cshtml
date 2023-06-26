@@ -1,3 +1,7 @@
+
+@{
+}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,22 +40,24 @@
 								@*<li><a class="dropdown-item" asp-area="" asp-controller="StudentHasProjects" asp-action="Index">StudentHasProject</a></li>*@
 								@*<li><a class="dropdown-item" asp-area="" asp-controller="Supervisors" asp-action="Index">Supervisor</a></li>*@
 								<li><a class="dropdown-item" asp-area="" asp-controller="Teachers" asp-action="Index">Teacher</a></li>
+								@*<li><a class="dropdown-item" asp-area="" asp-controller="Supervisors" asp-action="Index">Supervisor</a></li>*@
+
 							</ul>
 
-							@*<ul class="d-flex navbar-nav">
-								<li class="nav-item dropdown">
-									<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-										@httpAuthService.GetUserName()
-									</a>
-									<ul class="dropdown-menu">
-										<li><a class="dropdown-item @registerDisabled" asp-controller="Account" asp-action="Register">Registrieren</a></li>
-										<li><a class="dropdown-item" href="#">Profil</a></li>
-										<li><hr class="dropdown-divider"></li>
-										<li><a class="dropdown-item @httpAuthService.IsLoggedIn" asp-controller="Account" asp-action="LogOut">Log Out</a></li>
-									</ul>
-								</li>
-							</ul>*@
 						</li>
+
+						@if (Context.Request.Cookies["login_56baif"] == null)
+						{
+							<li class="nav-item">
+								<a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+							</li>
+						}
+						else
+						{
+							<li class="nav-item">
+								<a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+							</li>
+						}
 					</ul>
 				</div>
 			</div>

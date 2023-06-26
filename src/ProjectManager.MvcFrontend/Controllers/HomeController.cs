@@ -15,18 +15,21 @@ namespace ProjectManager.MvcFrontend
 
         public IActionResult Index()
         {
-            return View();
+            string message;
+            if (Request.Cookies["login_56baif"] == null)
+            {
+                message = "nicht angemeldet";
+            }
+            else
+            {
+                message = "angemeldet";
+            }
+            return View("Index", message);
         }
 
         public IActionResult Privacy()
         {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View("Privacy");
         }
     }
 }

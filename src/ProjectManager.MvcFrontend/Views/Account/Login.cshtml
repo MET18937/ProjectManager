@@ -1,0 +1,11 @@
+@using ProjectManager.DomainModel.Dtos;
+@model LoginDto
+
+<form method="post">
+    <label for="username">Username:</label>
+    <input id="username" type="text" asp-for="@Model.UserName" placeholder="Username..." /><br>
+    <label for="password">Password:</label>
+    <input id="password" type="text" asp-for="@Model.Password" placeholder="Password..." />
+    <button type="submit">Login</button>
+</form>
+
